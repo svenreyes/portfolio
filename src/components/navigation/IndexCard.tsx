@@ -43,7 +43,7 @@ export function IndexCard({ index, label, isActive, progress = 0, cardHeight = 1
       `}
         >
             {/* Content Container - Full height with space between */}
-            <div className="absolute inset-0 p-4git flex flex-col items-start justify-between z-10">
+            <div className="absolute inset-0 p-4 flex flex-col items-start justify-between z-10">
                 {/* Index Number - Top Left */}
                 <span
                     className={`
