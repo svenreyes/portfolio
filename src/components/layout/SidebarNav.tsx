@@ -1,49 +1,62 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import './SidebarNav.css';
+import { useScrollToSection } from '@/hooks/useScrollSpy';
+import { useSectionProgress } from '@/hooks/useSectionProgress';
+import { SECTIONS } from '@/config/sections.config';
+import { IndexCard } from '@/components/navigation/IndexCard';
 
-const navItems = [
-  { index: '00', label: 'Sven Reyes', href: '/' },
-  { index: '01', label: 'Welcome', href: '/welcome' },
-  { index: '02', label: 'Approach', href: '/approach' },
-  { index: '03', label: 'Work', href: '/work' },
-  { index: '04', label: 'Contact', href: '/contact' },
-  { index: '05', label: 'Resume', href: '/resume' },
-  { index: '06', label: '', href: '#' }, // Placeholder
-];
+const SECTION_IDS = SECTIONS.map((s) => s.id);
 
 export function SidebarNav() {
-  const pathname = usePathname();
+  // Use the new progress hook which gives us both the active ID and the progress
+  const { id: activeSectionId, progress, heights } = useSectionProgress(SECTION_IDS);
+
+  const scrollToSection = useScrollToSection();
+
+  // Calculate dynamic card height based on section length
+  const getCardHeight = (sectionId: string, isActive: boolean): number => {
+    if (!isActive) return 100; // Collapsed height
+
+    const sectionHeight = heights.get(sectionId) || 0;
+
+    // Calculate proportional height
+    // Min card height: 100px (when section is ~70vh)
+    // Max card height: 300px (when section is ~180vh)
+    const viewportHeight = typeof window !== 'undefined' ? window.innerHeight : 1000;
+    const minSectionHeight = viewportHeight * 0.7;
+    const maxSectionHeight = viewportHeight * 1.8;
+
+    const minCardHeight = 100;
+    const maxCardHeight = 300;
+
+    // Linear interpolation
+    const ratio = (sectionHeight - minSectionHeight) / (maxSectionHeight - minSectionHeight);
+    const clampedRatio = Math.max(0, Math.min(1, ratio));
+    const calculatedHeight = minCardHeight + (maxCardHeight - minCardHeight) * clampedRatio;
+
+    return Math.round(calculatedHeight);
+  };
 
   return (
-    <nav className="w-full h-full flex flex-col gap-4 p-6">
-      {navItems.map((item) => {
-        const isActive = pathname === item.href;
-        const isPlaceholder = item.index === '06';
-        
+    <nav className="w-full h-full flex flex-col gap-4 p-4">
+      {SECTIONS.map((section) => {
+        const isActive = activeSectionId === section.id;
+        const cardHeight = getCardHeight(section.id, isActive);
+
         return (
-          <Link
-            key={item.index}
-            href={item.href}
-            className={`glass-nav-card ${isActive ? 'glass-nav-card--active' : ''} ${isPlaceholder ? 'opacity-50 pointer-events-none' : ''}`}
-          >
-            {/* Index number */}
-            <span className="text-xs text-white/60 font-light tracking-wider relative z-10">
-              {item.index}
-            </span>
-            
-            {/* Label */}
-            {item.label && (
-              <span className="text-white text-base font-normal tracking-wide relative z-10">
-                {item.label}
-              </span>
-            )}
-          </Link>
+          <IndexCard
+            key={section.id}
+            index={section.index}
+            label={section.label}
+            isActive={isActive}
+            progress={isActive ? progress : 0}
+            cardHeight={cardHeight}
+            onClick={() => scrollToSection(section.id, 0)}
+          />
         );
       })}
     </nav>
   );
 }
+
 

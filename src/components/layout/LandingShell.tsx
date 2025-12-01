@@ -1,9 +1,8 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { CloudyBackground } from '@/components/background/CloudyBackground';
+
 import { SidebarNav } from './SidebarNav';
-import { MainPanel } from './MainPanel';
 
 interface LandingShellProps {
   children?: React.ReactNode;
@@ -97,8 +96,8 @@ export function LandingShell({ children }: LandingShellProps) {
 
   return (
     <>
-      {/* Fixed background with clouds */}
-      <CloudyBackground zIndex={0} />
+      {/* Fixed pure black background */}
+      <div className="fixed inset-0 bg-black z-0" />
 
       {/* Foreground content */}
       <div className="relative z-10 h-screen overflow-hidden">
@@ -107,7 +106,7 @@ export function LandingShell({ children }: LandingShellProps) {
           {/* Left Sidebar Navigation - Fixed/Sticky */}
           <aside
             ref={sidebarRef}
-            className="w-80 flex-shrink-0 h-full overflow-y-auto overflow-x-hidden
+            className="w-56 flex-shrink-0 h-full overflow-y-auto overflow-x-hidden
                      scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent
                      hover:scrollbar-thumb-white/30"
             style={{
@@ -118,18 +117,20 @@ export function LandingShell({ children }: LandingShellProps) {
             <SidebarNav />
           </aside>
 
-          {/* Right Main Panel - Independent Scroll */}
+          {/* Right Main Panel - Independent Scroll with Snap */}
           <main
             ref={mainContentRef}
+            data-scroll-container
             className="flex-1 h-full overflow-y-auto overflow-x-hidden
                      scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent
+                     hover:scrollbar-thumb-white/30
                      hover:scrollbar-thumb-white/30"
             style={{
               scrollbarWidth: 'thin',
               scrollbarColor: 'rgba(255, 255, 255, 0.2) transparent',
             }}
           >
-            <MainPanel>{children}</MainPanel>
+            {children}
           </main>
         </div>
 
@@ -142,7 +143,7 @@ export function LandingShell({ children }: LandingShellProps) {
 
           {/* Bottom: Main Panel */}
           <div className="flex-1 min-h-[600px]">
-            <MainPanel>{children}</MainPanel>
+            {children}
           </div>
         </div>
       </div>
