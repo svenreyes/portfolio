@@ -42,9 +42,9 @@ export function IndexCard({ index, label, isActive, progress = 0, cardHeight = 1
                 }
       `}
         >
-            {/* Content Container - Pinned to top */}
-            <div className="absolute top-0 left-0 w-full p-6 flex flex-col items-start gap-2 z-10">
-                {/* Index Number */}
+            {/* Content Container - Full height with space between */}
+            <div className="absolute inset-0 p-4git flex flex-col items-start justify-between z-10">
+                {/* Index Number - Top Left */}
                 <span
                     className={`
             text-[11px] font-light tracking-[0.15em] uppercase
@@ -55,7 +55,7 @@ export function IndexCard({ index, label, isActive, progress = 0, cardHeight = 1
                     {index}
                 </span>
 
-                {/* Label */}
+                {/* Label - Bottom Left */}
                 <span
                     className={`
             text-base font-normal tracking-wide
