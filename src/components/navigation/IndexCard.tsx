@@ -52,7 +52,7 @@ export function IndexCard({
       <div className="absolute inset-0 p-4 flex flex-col items-start justify-between z-10">
         <span
           className={`
-            text-[11px] font-light tracking-[0.15em] uppercase
+            text-[11px] font-bold tracking-[0.15em] uppercase
             transition-colors duration-300
             ${isActive ? 'text-white/90' : 'text-white/50 group-hover:text-white/70'}
           `}
@@ -62,9 +62,9 @@ export function IndexCard({
 
         <span
           className={`
-            text-base font-normal tracking-wide
+            text-base font-bold tracking-wide
             transition-colors duration-300
-            ${isActive ? 'text-white font-medium' : 'text-white/80 group-hover:text-white/95'}
+            ${isActive ? 'text-white' : 'text-white/80 group-hover:text-white/95'}
           `}
         >
           {label}

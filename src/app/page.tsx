@@ -5,21 +5,20 @@ import { CurvedSection } from '@/components/layout/CurvedSection';
 import { SectionEntryHeader } from '@/components/scroll/SectionEntryHeader';
 import { SplitHeadline } from '@/components/typography/SplitHeadline';
 import { BodyText } from '@/components/typography/BodyText';
+import { Hero3D } from '@/components/sections/Hero3D';
 
 export default function Home() {
   return (
     <LandingShell>
       <div className="flex flex-col gap-8">
-        <CurvedSection id="hero" className="min-h-[90vh] flex items-center justify-center">
-          <div className="max-w-6xl mx-auto px-8">
-            <SplitHeadline as="h1">
-              {`Crafting digital\nexperiences that\nilluminate`}
-            </SplitHeadline>
-
-            <BodyText className="mt-12 max-w-2xl" size="lg">
-              We are looking to bring you enlightenment. To offer illumination in stormy skies.
-            </BodyText>
-          </div>
+        <CurvedSection id="hero" className="min-h-[90vh]">
+          <Hero3D 
+            name="Sven Reyes"
+            tagline="we are looking to bring
+you enlightenment
+To offer illumination in
+stormy skies"
+          />
         </CurvedSection>
 
         <div id="welcome" className="flex flex-col gap-4">
