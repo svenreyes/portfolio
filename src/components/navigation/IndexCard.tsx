@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useRef, useEffect } from 'react';
+import { useCallback } from 'react';
 
 interface IndexCardProps {
     index: string;
@@ -28,9 +28,10 @@ export function IndexCard({ index, label, isActive, progress = 0, cardHeight = 1
             onClick={handleClick}
             style={{
                 height: `${cardHeight}px`,
+                minHeight: `${cardHeight}px`,
             }}
             className={`
-        group relative w-full
+        group relative w-full flex-shrink-0
         flex flex-col items-start 
         rounded-2xl border
         transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
@@ -84,14 +85,6 @@ export function IndexCard({ index, label, isActive, progress = 0, cardHeight = 1
                 />
             </div>
 
-            {/* Active indicator bar (Left side) */}
-            <div
-                className={`
-                    absolute left-0 top-6 w-1 h-12 bg-white/60 rounded-r-full
-                    transition-all duration-300
-                    ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'}
-                `}
-            />
         </button>
     );
 }
