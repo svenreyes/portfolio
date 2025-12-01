@@ -1,3 +1,9 @@
+/**
+ * SectionMarker Component
+ * 
+ * Sticky section label that pins during scroll with GSAP animation.
+ * Displays section index and name with a decorative line separator.
+ */
 'use client';
 
 import { useEffect, useRef } from 'react';
@@ -14,10 +20,6 @@ interface SectionMarkerProps {
   className?: string;
 }
 
-/**
- * SectionMarker - Sticky section labels that pin during scroll
- * Inspired by Raw Materials section headers
- */
 export function SectionMarker({ label, index, className = '' }: SectionMarkerProps) {
   const markerRef = useRef<HTMLDivElement>(null);
 
@@ -56,4 +58,3 @@ export function SectionMarker({ label, index, className = '' }: SectionMarkerPro
     </div>
   );
 }
-

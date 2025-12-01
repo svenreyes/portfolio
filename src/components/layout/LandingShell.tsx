@@ -1,7 +1,13 @@
+/**
+ * LandingShell Component
+ * 
+ * Main layout wrapper providing the split-scroll interface with sidebar
+ * navigation on the left and main content on the right. Handles independent
+ * scroll isolation between panels and responsive layout for mobile/desktop.
+ */
 'use client';
 
 import { useEffect, useRef } from 'react';
-
 import { SidebarNav } from './SidebarNav';
 
 interface LandingShellProps {
@@ -18,10 +24,8 @@ export function LandingShell({ children }: LandingShellProps) {
 
     if (!sidebar || !mainContent) return;
 
-    // Prevent body scroll
     document.body.style.overflow = 'hidden';
 
-    // Track which element is being hovered
     let hoveredElement: HTMLElement | null = null;
 
     const handleMouseEnter = (element: HTMLElement) => {
@@ -32,11 +36,9 @@ export function LandingShell({ children }: LandingShellProps) {
       hoveredElement = null;
     };
 
-    // Handle scroll isolation based on hover
     const handleWheel = (e: WheelEvent) => {
       const target = e.target as HTMLElement;
 
-      // Determine which container should scroll
       let scrollContainer: HTMLElement | null = null;
 
       if (hoveredElement) {
@@ -49,19 +51,15 @@ export function LandingShell({ children }: LandingShellProps) {
 
       if (!scrollContainer) return;
 
-      // Prevent default scroll
       e.preventDefault();
       e.stopPropagation();
 
-      // Calculate scroll amount
       const scrollAmount = e.deltaY;
       const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
 
-      // Check scroll bounds
       const canScrollUp = scrollTop > 0;
       const canScrollDown = scrollTop < scrollHeight - clientHeight - 1;
 
-      // Only scroll if we can in that direction
       if (scrollAmount < 0 && canScrollUp) {
         scrollContainer.scrollTop += scrollAmount;
       } else if (scrollAmount > 0 && canScrollDown) {
@@ -69,19 +67,15 @@ export function LandingShell({ children }: LandingShellProps) {
       }
     };
 
-    // Create stable event handlers
     const sidebarEnter = () => handleMouseEnter(sidebar);
     const sidebarLeave = handleMouseLeave;
     const mainEnter = () => handleMouseEnter(mainContent);
     const mainLeave = handleMouseLeave;
 
-    // Add mouse enter/leave listeners
     sidebar.addEventListener('mouseenter', sidebarEnter);
     sidebar.addEventListener('mouseleave', sidebarLeave);
     mainContent.addEventListener('mouseenter', mainEnter);
     mainContent.addEventListener('mouseleave', mainLeave);
-
-    // Add wheel listener to document
     document.addEventListener('wheel', handleWheel, { passive: false });
 
     return () => {
@@ -96,34 +90,22 @@ export function LandingShell({ children }: LandingShellProps) {
 
   return (
     <>
-      {/* Fixed pure black background */}
       <div className="fixed inset-0 bg-black z-0" />
 
-      {/* Foreground content */}
       <div className="relative z-10 h-screen overflow-hidden">
-        {/* Desktop Layout: Sidebar + Main Panel */}
-        <div className="hidden lg:flex h-full p-6 gap-6">
-          {/* Left Sidebar Navigation - Fixed/Sticky */}
+        <div className="hidden lg:flex h-full p-4 gap-4">
           <aside
             ref={sidebarRef}
-            className="w-56 flex-shrink-0 h-full overflow-y-auto overflow-x-hidden
-                     scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent
-                     hover:scrollbar-thumb-white/30"
-            style={{
-              scrollbarWidth: 'thin',
-              scrollbarColor: 'rgba(255, 255, 255, 0.2) transparent',
-            }}
+            className="w-[200px] flex-shrink-0 h-full overflow-y-auto overflow-x-hidden scrollbar-none"
           >
             <SidebarNav />
           </aside>
 
-          {/* Right Main Panel - Independent Scroll with Snap */}
           <main
             ref={mainContentRef}
             data-scroll-container
             className="flex-1 h-full overflow-y-auto overflow-x-hidden
                      scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent
-                     hover:scrollbar-thumb-white/30
                      hover:scrollbar-thumb-white/30"
             style={{
               scrollbarWidth: 'thin',
@@ -134,14 +116,11 @@ export function LandingShell({ children }: LandingShellProps) {
           </main>
         </div>
 
-        {/* Mobile/Tablet Layout: Stacked */}
         <div className="lg:hidden h-full overflow-y-auto p-4 flex flex-col gap-4">
-          {/* Top: Condensed Navigation */}
           <div className="w-full">
             <SidebarNav />
           </div>
 
-          {/* Bottom: Main Panel */}
           <div className="flex-1 min-h-[600px]">
             {children}
           </div>
@@ -150,4 +129,3 @@ export function LandingShell({ children }: LandingShellProps) {
     </>
   );
 }
-

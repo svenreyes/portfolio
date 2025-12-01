@@ -1,3 +1,9 @@
+/**
+ * BodyText Component
+ * 
+ * Responsive body copy with clamp() scaling for fluid typography.
+ * Available in small, medium, and large sizes.
+ */
 'use client';
 
 interface BodyTextProps {
@@ -6,9 +12,6 @@ interface BodyTextProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-/**
- * BodyText - Responsive body copy with clamp() scaling
- */
 export function BodyText({ 
   children, 
   className = '', 
@@ -21,11 +24,8 @@ export function BodyText({
   };
 
   return (
-    <p 
-      className={`reveal font-light leading-relaxed text-white/80 ${sizeClasses[size]} ${className}`}
-    >
+    <p className={`reveal font-light leading-relaxed text-white/80 ${sizeClasses[size]} ${className}`}>
       {children}
     </p>
   );
 }
-

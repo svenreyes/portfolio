@@ -9,8 +9,7 @@ import { BodyText } from '@/components/typography/BodyText';
 export default function Home() {
   return (
     <LandingShell>
-      <div className="flex flex-col gap-8 p-8">
-        {/* Hero Section - Standard Height */}
+      <div className="flex flex-col gap-8">
         <CurvedSection id="hero" className="min-h-[90vh] flex items-center justify-center">
           <div className="max-w-6xl mx-auto px-8">
             <SplitHeadline as="h1">
@@ -23,7 +22,6 @@ export default function Home() {
           </div>
         </CurvedSection>
 
-        {/* Welcome Section - TALLER to test scroll progress */}
         <div id="welcome" className="flex flex-col gap-4">
           <SectionEntryHeader sectionId="welcome" />
           <CurvedSection className="min-h-[150vh] py-12">
@@ -44,7 +42,6 @@ export default function Home() {
                 </BodyText>
               </div>
 
-              {/* Extra content to force scroll */}
               <div className="mt-32 p-12 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-sm">
                 <h3 className="text-2xl text-white mb-4">Extended Content</h3>
                 <p className="text-white/60">
@@ -57,7 +54,6 @@ export default function Home() {
           </CurvedSection>
         </div>
 
-        {/* Approach Section - TALLER to test scroll progress */}
         <div id="approach" className="flex flex-col gap-4">
           <SectionEntryHeader sectionId="approach" />
           <CurvedSection className="min-h-[180vh] py-12">
@@ -66,7 +62,7 @@ export default function Home() {
                 {`Thoughtful\nby design`}
               </SplitHeadline>
 
-              <div className="space-y-48"> {/* Large spacing to create height */}
+              <div className="space-y-48">
                 <div className="reveal">
                   <h3 className="text-[clamp(1.5rem,3vw,2.5rem)] text-white/90 font-light mb-6">
                     Discovery
@@ -101,7 +97,6 @@ export default function Home() {
           </CurvedSection>
         </div>
 
-        {/* Work Section - Standard Height */}
         <div id="work" className="flex flex-col gap-4">
           <SectionEntryHeader sectionId="work" />
           <CurvedSection className="min-h-screen py-12">
@@ -114,7 +109,6 @@ export default function Home() {
                 A collection of work that showcases our approach to digital design and development.
               </BodyText>
 
-              {/* Placeholder for project cards */}
               <div className="grid grid-cols-1 gap-24">
                 {[1, 2, 3].map((item) => (
                   <div key={item} className="reveal group">
@@ -138,7 +132,6 @@ export default function Home() {
           </CurvedSection>
         </div>
 
-        {/* Projects Section - Medium Height */}
         <div id="projects" className="flex flex-col gap-4">
           <SectionEntryHeader sectionId="projects" />
           <CurvedSection className="min-h-[120vh] py-12">
@@ -174,7 +167,6 @@ export default function Home() {
           </CurvedSection>
         </div>
 
-        {/* Contact Section - Short Height */}
         <div id="contact" className="flex flex-col gap-4">
           <SectionEntryHeader sectionId="contact" />
           <CurvedSection className="min-h-[80vh] py-12">
@@ -204,7 +196,6 @@ export default function Home() {
           </CurvedSection>
         </div>
 
-        {/* Resume Section - Short Height */}
         <div id="resume" className="flex flex-col gap-4">
           <SectionEntryHeader sectionId="resume" />
           <CurvedSection className="min-h-[70vh] py-12">
@@ -229,4 +220,3 @@ export default function Home() {
     </LandingShell>
   );
 }
-

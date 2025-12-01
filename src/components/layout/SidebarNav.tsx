@@ -1,3 +1,11 @@
+/**
+ * SidebarNav Component
+ * 
+ * Vertical navigation sidebar containing IndexCards for each section.
+ * Tracks active section based on scroll position and auto-scrolls to
+ * keep the active card visible. Card heights dynamically adjust based
+ * on section content length.
+ */
 'use client';
 
 import { useEffect, useRef } from 'react';
@@ -9,15 +17,10 @@ import { IndexCard } from '@/components/navigation/IndexCard';
 const SECTION_IDS = SECTIONS.map((s) => s.id);
 
 export function SidebarNav() {
-  // Use the new progress hook which gives us both the active ID and the progress
   const { id: activeSectionId, progress, heights } = useSectionProgress(SECTION_IDS);
-
   const scrollToSection = useScrollToSection();
-  
-  // Refs for each card to enable auto-scrolling
   const cardRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
-  // Auto-scroll to active card when it changes
   useEffect(() => {
     if (!activeSectionId) return;
     
@@ -30,23 +33,23 @@ export function SidebarNav() {
     }
   }, [activeSectionId]);
 
-  // Calculate dynamic card height based on section length
+  const activeSectionIndex = SECTIONS.findIndex(s => s.id === activeSectionId);
+
+  const getInactiveProgress = (sectionIndex: number): number => {
+    if (sectionIndex < activeSectionIndex) return 1;
+    return 0;
+  };
+
   const getCardHeight = (sectionId: string, isActive: boolean): number => {
-    if (!isActive) return 120; // Collapsed height (increased from 100)
+    if (!isActive) return 120;
 
     const sectionHeight = heights.get(sectionId) || 0;
-
-    // Calculate proportional height
-    // Min card height: 140px (when section is ~70vh)
-    // Max card height: 320px (when section is ~180vh)
     const viewportHeight = typeof window !== 'undefined' ? window.innerHeight : 1000;
     const minSectionHeight = viewportHeight * 0.7;
     const maxSectionHeight = viewportHeight * 1.8;
-
     const minCardHeight = 140;
     const maxCardHeight = 320;
 
-    // Linear interpolation
     const ratio = (sectionHeight - minSectionHeight) / (maxSectionHeight - minSectionHeight);
     const clampedRatio = Math.max(0, Math.min(1, ratio));
     const calculatedHeight = minCardHeight + (maxCardHeight - minCardHeight) * clampedRatio;
@@ -56,9 +59,10 @@ export function SidebarNav() {
 
   return (
     <nav className="w-full h-full flex flex-col gap-4 p-4">
-      {SECTIONS.map((section) => {
+      {SECTIONS.map((section, index) => {
         const isActive = activeSectionId === section.id;
         const cardHeight = getCardHeight(section.id, isActive);
+        const cardProgress = isActive ? progress : getInactiveProgress(index);
 
         return (
           <div
@@ -75,7 +79,7 @@ export function SidebarNav() {
               index={section.index}
               label={section.label}
               isActive={isActive}
-              progress={isActive ? progress : 0}
+              progress={cardProgress}
               cardHeight={cardHeight}
               onClick={() => scrollToSection(section.id, 0)}
             />
@@ -85,5 +89,3 @@ export function SidebarNav() {
     </nav>
   );
 }
-
-

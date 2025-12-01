@@ -1,6 +1,8 @@
 /**
  * Section Configuration
- * Single source of truth for all portfolio sections
+ * 
+ * Single source of truth for all portfolio sections.
+ * Defines section IDs, display indices, labels, and descriptions.
  */
 
 export interface Section {
@@ -55,12 +57,10 @@ export const SECTIONS: Section[] = [
   },
 ];
 
-// Helper to get section by id
 export const getSectionById = (id: string): Section | undefined => {
   return SECTIONS.find((section) => section.id === id);
 };
 
-// Helper to get section index
 export const getSectionIndex = (id: string): number => {
   return SECTIONS.findIndex((section) => section.id === id);
 };

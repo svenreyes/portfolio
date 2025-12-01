@@ -1,3 +1,10 @@
+/**
+ * SplitHeadline Component
+ * 
+ * Large headlines broken across lines with controlled spacing.
+ * Uses CSS clamp() for responsive type scales. Split lines using
+ * newline characters in the children string.
+ */
 'use client';
 
 interface SplitHeadlineProps {
@@ -6,11 +13,6 @@ interface SplitHeadlineProps {
   as?: 'h1' | 'h2' | 'h3';
 }
 
-/**
- * SplitHeadline - Large headlines broken across lines with controlled spacing
- * Uses CSS clamp() for responsive type scales
- * Inspired by Raw Materials typography
- */
 export function SplitHeadline({ 
   children, 
   className = '', 
@@ -32,9 +34,7 @@ export function SplitHeadline({
         <span 
           key={index} 
           className="block"
-          style={{ 
-            animationDelay: `${index * 0.1}s` 
-          }}
+          style={{ animationDelay: `${index * 0.1}s` }}
         >
           {line}
         </span>
@@ -42,4 +42,3 @@ export function SplitHeadline({
     </Component>
   );
 }
-

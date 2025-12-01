@@ -1,3 +1,10 @@
+/**
+ * SectionEntryHeader Component
+ * 
+ * Displays at the start of each section with a small banner announcing
+ * the section and a large hero card showing the section number and name.
+ * Styled to match the glass-morphism design with white outlines.
+ */
 'use client';
 
 import { SECTIONS } from '@/config/sections.config';
@@ -6,11 +13,6 @@ interface SectionEntryHeaderProps {
   sectionId: string;
 }
 
-/**
- * SectionEntryHeader - Displays when entering a new section
- * Shows a small banner + large hero card with section info
- * Styled to match CurvedSection with white outline
- */
 export function SectionEntryHeader({ sectionId }: SectionEntryHeaderProps) {
   const section = SECTIONS.find(s => s.id === sectionId);
   const totalSections = SECTIONS.length;
@@ -19,7 +21,6 @@ export function SectionEntryHeader({ sectionId }: SectionEntryHeaderProps) {
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Small Entry Banner */}
       <div 
         className="
           w-full px-6 py-3 rounded-2xl
@@ -37,7 +38,6 @@ export function SectionEntryHeader({ sectionId }: SectionEntryHeaderProps) {
         </span>
       </div>
 
-      {/* Large Hero Card */}
       <div 
         className="
           w-full min-h-[60vh] p-12 rounded-[40px]
@@ -46,12 +46,10 @@ export function SectionEntryHeader({ sectionId }: SectionEntryHeaderProps) {
           transition-colors duration-500 hover:border-white/30
         "
       >
-        {/* Index Number - Top Left */}
         <span className="text-[clamp(4rem,10vw,8rem)] font-light leading-none text-white/90">
           {section.index}
         </span>
 
-        {/* Section Label - Bottom Left */}
         <span className="text-[clamp(4rem,12vw,10rem)] font-normal leading-none text-white">
           {section.label}
         </span>
@@ -59,4 +57,3 @@ export function SectionEntryHeader({ sectionId }: SectionEntryHeaderProps) {
     </div>
   );
 }
-

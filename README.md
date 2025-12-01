@@ -1,124 +1,107 @@
-# Portfolio Foundation
+# Sven Reyes Portfolio
 
-A modern portfolio website inspired by Raw Materials' storytelling aesthetic, built with Next.js 14+, TypeScript, Tailwind CSS, and React Three Fiber.
+A modern single-page portfolio with split-scroll navigation, built with Next.js 14+, TypeScript, and Tailwind CSS.
 
 ## Features
 
-- **Golden Cloudy Background**: Custom GLSL shader with animated golden clouds using React Three Fiber
-- **Enhanced Glassmorphic UI**: Premium glass-style navigation cards inspired by @react-bits/GlassSurface
-  - Advanced backdrop filters with blur, saturation, and brightness
-  - Layered shadows for depth (golden-tinted outset + white inset highlights)
-  - Gradient overlays for light reflection effects
-  - Safari fallback support
-- **Responsive Design**: Desktop sidebar + main panel layout that adapts to mobile/tablet
-- **Route-Ready**: Pre-configured routes for all sections (Welcome, Approach, Work, Contact, Resume)
-- **TypeScript**: Fully typed for better developer experience
-- **Performance Optimized**: Static generation for fast page loads
+- **Split-Scroll Interface**: Independent scrolling sidebar navigation and main content panel
+- **Dynamic Index Cards**: Navigation cards that expand based on section length with real-time progress indicators
+- **Section Entry Headers**: Animated section banners with large hero cards
+- **Glass-Morphism Design**: Subtle borders, backdrop blur, and hover states
+- **Responsive Layout**: Desktop sidebar + main panel, mobile stacked layout
+- **Instant Navigation**: Click any index card to jump directly to that section
 
 ## Getting Started
 
-### Development
-
 ```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
+
+# Build for production
+npm run build
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the site.
-
-### Build
-
-```bash
-npm run build
-npm start
-```
 
 ## Project Structure
 
 ```
 src/
-├── app/                          # Next.js App Router pages
-│   ├── page.tsx                  # Home page
-│   ├── welcome/page.tsx          # Welcome section
-│   ├── approach/page.tsx         # Approach section
-│   ├── work/page.tsx             # Work section
-│   ├── contact/page.tsx          # Contact section
-│   ├── resume/page.tsx           # Resume section
-│   ├── layout.tsx                # Root layout
-│   └── globals.css               # Global styles with Tailwind config
+├── app/
+│   ├── page.tsx              # Main single-page application
+│   ├── layout.tsx            # Root layout with fonts
+│   └── globals.css           # Global styles and scrollbar utilities
 │
 ├── components/
-│   ├── background/
-│   │   ├── CloudyBackground.tsx  # Canvas wrapper for 3D background
-│   │   └── SmokeBackground.tsx   # GLSL shader implementation
+│   ├── layout/
+│   │   ├── LandingShell.tsx  # Split-scroll layout wrapper
+│   │   ├── SidebarNav.tsx    # Index card navigation
+│   │   └── CurvedSection.tsx # Content section container
 │   │
-│   └── layout/
-│       ├── LandingShell.tsx      # Main layout wrapper
-│       ├── SidebarNav.tsx        # Navigation cards (glassmorphic)
-│       └── MainPanel.tsx         # Content panel with header & poem
+│   ├── navigation/
+│   │   └── IndexCard.tsx     # Navigation card with progress indicator
+│   │
+│   ├── scroll/
+│   │   ├── SectionEntryHeader.tsx  # Section entry banner + hero
+│   │   └── SectionMarker.tsx       # Sticky section labels
+│   │
+│   └── typography/
+│       ├── SplitHeadline.tsx # Responsive multi-line headlines
+│       └── BodyText.tsx      # Responsive body copy
+│
+├── hooks/
+│   ├── useScrollSpy.ts       # Section visibility tracking
+│   └── useSectionProgress.ts # Scroll progress within sections
+│
+├── config/
+│   └── sections.config.ts    # Section definitions
+│
+└── assets/
+    └── Nordique Pro fonts
 ```
+
+## Sections
+
+| Index | Section  | Description      |
+|-------|----------|------------------|
+| 00    | Hero     | Landing intro    |
+| 01    | Welcome  | About me         |
+| 02    | Approach | How I work       |
+| 03    | Work     | Experience       |
+| 04    | Projects | Selected work    |
+| 05    | Contact  | Get in touch     |
+| 06    | Resume   | Download CV      |
 
 ## Customization
 
-### Colors
+### Adding/Editing Sections
 
-The golden color palette is defined in `src/app/globals.css`:
-
-```css
---gold-base: #C49A6C;
---gold-light: #D1A875;
---gold-highlight: #EAD0A3;
---gold-shadow: #9B7653;
-```
-
-### Shader Animation
-
-Modify the cloud animation in `src/components/background/SmokeBackground.tsx`:
-- `loopT`: Controls animation speed (default: 36s)
-- `offset`: Controls cloud movement intensity
-- Color gradients in the fragment shader
-
-### Navigation
-
-Edit navigation items in `src/components/layout/SidebarNav.tsx`:
+Edit `src/config/sections.config.ts`:
 
 ```typescript
-const navItems = [
-  { index: '00', label: 'Sven Reyes', href: '/' },
-  // Add more items...
+export const SECTIONS: Section[] = [
+  { id: 'hero', index: '00', label: 'Your Name' },
+  { id: 'about', index: '01', label: 'About' },
+  // Add more sections...
 ];
 ```
 
-### 3D Model Placeholder
+### Styling
 
-The centered placeholder in `MainPanel.tsx` is ready for a React Three Fiber 3D model. Pass your custom component as children:
+- Colors and CSS variables in `src/app/globals.css`
+- Component-specific styles use Tailwind classes
+- Glass-morphism via `border-white/20`, `backdrop-blur-sm`
 
-```tsx
-<LandingShell>
-  <YourCustom3DModel />
-</LandingShell>
-```
+## Tech Stack
 
-## Technology Stack
-
-- **Framework**: Next.js 16.0.2 (App Router)
+- **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript 5
 - **Styling**: Tailwind CSS v4
-- **3D Graphics**: React Three Fiber + Three.js
-- **React**: React 19.2.0
-
-## Design Inspiration
-
-- Layout inspired by [The Raw Materials](https://www.therawmaterials.com/)
-- Golden cloudy aesthetic with glassmorphic UI elements
-- Minimal, story-driven navigation structure
-
-## Next Steps
-
-1. Replace the 3D placeholder with an actual React Three Fiber model
-2. Add content to each section page
-3. Implement scroll-driven animations (GSAP, Framer Motion, etc.)
-4. Add page transitions between routes
-5. Integrate analytics and SEO optimization
+- **Animations**: GSAP + ScrollTrigger
+- **React**: React 19
 
 ## License
 
