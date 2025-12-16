@@ -6,6 +6,7 @@ import { SectionEntryHeader } from '@/components/scroll/SectionEntryHeader';
 import { SplitHeadline } from '@/components/typography/SplitHeadline';
 import { BodyText } from '@/components/typography/BodyText';
 import { Hero3D } from '@/components/sections/Hero3D';
+import { AboutHero } from '@/components/sections/AboutHero';
 
 export default function Home() {
   return (
@@ -21,35 +22,10 @@ stormy skies"
           />
         </CurvedSection>
 
-        <div id="welcome" className="flex flex-col gap-4">
-          <SectionEntryHeader sectionId="welcome" />
-          <CurvedSection className="min-h-[150vh] py-12">
-            <div className="max-w-6xl mx-auto px-8 h-full flex flex-col">
-              <SplitHeadline as="h2" className="mb-16">
-                {`We design\nwith purpose`}
-              </SplitHeadline>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-auto">
-                <BodyText>
-                  Every project begins with understanding. We dive deep into your vision,
-                  your audience, and your goals to create experiences that resonate.
-                </BodyText>
-
-                <BodyText>
-                  Our approach combines strategic thinking with creative execution,
-                  ensuring that every pixel serves a purpose.
-                </BodyText>
-              </div>
-
-              <div className="mt-32 p-12 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-sm">
-                <h3 className="text-2xl text-white mb-4">Extended Content</h3>
-                <p className="text-white/60">
-                  This section is intentionally taller than the viewport to demonstrate the
-                  sidebar scroll progress indicator. As you scroll down past this point,
-                  watch the circle in the "Hello" card move downwards.
-                </p>
-              </div>
-            </div>
+        <div id="about" className="flex flex-col gap-4">
+          <SectionEntryHeader sectionId="about" />
+          <CurvedSection className="min-h-screen">
+            <AboutHero />
           </CurvedSection>
         </div>
 
@@ -96,8 +72,8 @@ stormy skies"
           </CurvedSection>
         </div>
 
-        <div id="work" className="flex flex-col gap-4">
-          <SectionEntryHeader sectionId="work" />
+        <div id="experience" className="flex flex-col gap-4">
+          <SectionEntryHeader sectionId="experience" />
           <CurvedSection className="min-h-screen py-12">
             <div className="max-w-6xl mx-auto px-8">
               <SplitHeadline as="h2" className="mb-16">
@@ -195,26 +171,6 @@ stormy skies"
           </CurvedSection>
         </div>
 
-        <div id="resume" className="flex flex-col gap-4">
-          <SectionEntryHeader sectionId="resume" />
-          <CurvedSection className="min-h-[70vh] py-12">
-            <div className="max-w-6xl mx-auto px-8 text-center">
-              <SplitHeadline as="h2" className="mb-16">
-                {`My experience`}
-              </SplitHeadline>
-
-              <BodyText className="mb-12">
-                Download my resume to learn more about my background and experience.
-              </BodyText>
-
-              <button className="px-8 py-4 bg-white/10 border border-white/20 rounded-full
-                               text-white hover:bg-white/20 transition-all duration-300
-                               backdrop-blur-sm">
-                Download Resume
-              </button>
-            </div>
-          </CurvedSection>
-        </div>
       </div>
     </LandingShell>
   );

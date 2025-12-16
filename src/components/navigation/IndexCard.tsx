@@ -1,10 +1,4 @@
-/**
- * IndexCard Component
- * 
- * Navigation card displayed in the sidebar. Shows section index number and label
- * with a progress indicator that tracks scroll position within the active section.
- * Expands dynamically when active based on section height.
- */
+// nav card with progress indicator
 'use client';
 
 import { useCallback } from 'react';

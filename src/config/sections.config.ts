@@ -1,9 +1,4 @@
-/**
- * Section Configuration
- * 
- * Single source of truth for all portfolio sections.
- * Defines section IDs, display indices, labels, and descriptions.
- */
+// sections config - ids and labels for nav cards
 
 export interface Section {
   id: string;
@@ -17,43 +12,31 @@ export const SECTIONS: Section[] = [
     id: 'hero',
     index: '00',
     label: 'Sven Reyes',
-    description: 'Software Engineer',
   },
   {
-    id: 'welcome',
+    id: 'about',
     index: '01',
-    label: 'Welcome',
-    description: 'About me',
+    label: 'About',
   },
   {
     id: 'approach',
     index: '02',
     label: 'Approach',
-    description: 'How I work',
   },
   {
-    id: 'work',
+    id: 'experience',
     index: '03',
-    label: 'Work',
-    description: 'Experience',
+    label: 'Experience',
   },
   {
     id: 'projects',
     index: '04',
     label: 'Projects',
-    description: 'Selected work',
   },
   {
     id: 'contact',
     index: '05',
     label: 'Contact',
-    description: 'Get in touch',
-  },
-  {
-    id: 'resume',
-    index: '06',
-    label: 'Resume',
-    description: 'Download CV',
   },
 ];
 
