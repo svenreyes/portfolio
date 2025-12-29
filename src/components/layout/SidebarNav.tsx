@@ -1,11 +1,3 @@
-/**
- * SidebarNav Component
- * 
- * Vertical navigation sidebar containing IndexCards for each section.
- * Tracks active section based on scroll position and auto-scrolls to
- * keep the active card visible. Card heights dynamically adjust based
- * on section content length.
- */
 'use client';
 
 import { useEffect, useRef } from 'react';
@@ -15,6 +7,16 @@ import { SECTIONS } from '@/config/sections.config';
 import { IndexCard } from '@/components/navigation/IndexCard';
 
 const SECTION_IDS = SECTIONS.map((s) => s.id);
+
+// component count and size multiplier for each section
+const SECTION_WEIGHTS: Record<string, number> = {
+  hero: 1,      // 1 large component
+  about: 3,     // 3 components (AboutHero, AboutWhatIDo, AboutMotivation)
+  approach: 7,  // 7 components (3 bars, subline, pillars, capabilities header, capabilities grid)
+  experience: 1,
+  projects: 1.5,
+  contact: 1,
+};
 
 export function SidebarNav() {
   const { id: activeSectionId, progress, heights } = useSectionProgress(SECTION_IDS);
@@ -41,18 +43,21 @@ export function SidebarNav() {
   };
 
   const getCardHeight = (sectionId: string, isActive: boolean): number => {
-    if (!isActive) return 120;
+    const defaultHeight = 120;
+    if (!isActive) return defaultHeight;
 
-    const sectionHeight = heights.get(sectionId) || 0;
-    const viewportHeight = typeof window !== 'undefined' ? window.innerHeight : 1000;
-    const minSectionHeight = viewportHeight * 0.7;
-    const maxSectionHeight = viewportHeight * 1.8;
-    const minCardHeight = 140;
-    const maxCardHeight = 320;
-
-    const ratio = (sectionHeight - minSectionHeight) / (maxSectionHeight - minSectionHeight);
-    const clampedRatio = Math.max(0, Math.min(1, ratio));
-    const calculatedHeight = minCardHeight + (maxCardHeight - minCardHeight) * clampedRatio;
+    // get weight for this section based on component count
+    const weight = SECTION_WEIGHTS[sectionId] || 1;
+    
+    // expanded height scales with section weight
+    const minExpandedHeight = 140;
+    const heightPerWeight = 40;
+    const maxHeight = 400;
+    
+    const calculatedHeight = Math.min(
+      maxHeight,
+      minExpandedHeight + (weight * heightPerWeight)
+    );
 
     return Math.round(calculatedHeight);
   };
