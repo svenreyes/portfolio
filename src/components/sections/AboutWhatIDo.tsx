@@ -31,11 +31,11 @@ export function AboutWhatIDo() {
   return (
     <div 
       ref={sectionRef}
-      className="relative w-full min-h-screen flex flex-col justify-center p-8 md:p-12 lg:p-16"
+      className="relative w-full py-16 md:py-24 flex flex-col justify-center p-6 md:p-10"
     >
       <div className="max-w-5xl">
         {/* headline */}
-        <h2 className="mb-12 md:mb-16">
+        <h2 className="mb-8 md:mb-10">
           {headlineLines.map((line, i) => (
             <span
               key={i}

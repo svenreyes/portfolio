@@ -34,10 +34,10 @@ stormy skies"
           <CurvedComponent className="min-h-screen">
             <AboutHero />
           </CurvedComponent>
-          <CurvedComponent className="min-h-screen">
+          <CurvedComponent>
             <AboutWhatIDo />
           </CurvedComponent>
-          <CurvedComponent className="min-h-screen">
+          <CurvedComponent>
             <AboutMotivation />
           </CurvedComponent>
         </div>
