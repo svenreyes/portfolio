@@ -1,7 +1,7 @@
 'use client';
 
 import { LandingShell } from '@/components/layout/LandingShell';
-import { CurvedSection } from '@/components/layout/CurvedSection';
+import { CurvedComponent } from '@/components/layout/CurvedComponent';
 import { SectionEntryHeader } from '@/components/scroll/SectionEntryHeader';
 import { SplitHeadline } from '@/components/typography/SplitHeadline';
 import { BodyText } from '@/components/typography/BodyText';
@@ -11,13 +11,13 @@ import { AboutWhatIDo } from '@/components/sections/AboutWhatIDo';
 import { AboutMotivation } from '@/components/sections/AboutMotivation';
 import { ApproachBar } from '@/components/sections/ApproachBar';
 import { ApproachSubline } from '@/components/sections/ApproachSubline';
-import { ApproachPillars } from '@/components/sections/ApproachPillars';
+import { ApproachPillarsSection } from '@/components/sections/ApproachPillarsSection';
 
 export default function Home() {
   return (
     <LandingShell>
       <div className="flex flex-col gap-8">
-        <CurvedSection id="hero" className="min-h-[90vh]">
+        <CurvedComponent id="hero" className="min-h-[90vh]">
           <Hero3D 
             name="Sven Reyes"
             tagline="we are looking to bring
@@ -25,43 +25,41 @@ you enlightenment
 To offer illumination in
 stormy skies"
           />
-        </CurvedSection>
+        </CurvedComponent>
 
         <div id="about" className="flex flex-col gap-4">
           <SectionEntryHeader sectionId="about" />
-          <CurvedSection className="min-h-screen">
+          <CurvedComponent className="min-h-screen">
             <AboutHero />
-          </CurvedSection>
-          <CurvedSection className="min-h-screen">
+          </CurvedComponent>
+          <CurvedComponent className="min-h-screen">
             <AboutWhatIDo />
-          </CurvedSection>
-          <CurvedSection className="min-h-screen">
+          </CurvedComponent>
+          <CurvedComponent className="min-h-screen">
             <AboutMotivation />
-          </CurvedSection>
+          </CurvedComponent>
         </div>
 
         <div id="approach" className="flex flex-col gap-4">
           <SectionEntryHeader sectionId="approach" />
-          <CurvedSection>
+          <CurvedComponent>
             <ApproachBar text="Systems-first" leftLabel="(Systems)" rightLabel="(First)" />
-          </CurvedSection>
-          <CurvedSection>
+          </CurvedComponent>
+          <CurvedComponent>
             <ApproachBar text="End-to-end" leftLabel="(End)" rightLabel="(End)" />
-          </CurvedSection>
-          <CurvedSection>
+          </CurvedComponent>
+          <CurvedComponent>
             <ApproachBar text="Built with intent" leftLabel="(Built)" rightLabel="(Intent)" />
-          </CurvedSection>
-          <CurvedSection>
+          </CurvedComponent>
+          <CurvedComponent>
             <ApproachSubline />
-          </CurvedSection>
-          <CurvedSection className="min-h-screen">
-            <ApproachPillars />
-          </CurvedSection>
+          </CurvedComponent>
+          <ApproachPillarsSection />
         </div>
 
         <div id="experience" className="flex flex-col gap-4">
           <SectionEntryHeader sectionId="experience" />
-          <CurvedSection className="min-h-screen py-12">
+          <CurvedComponent className="min-h-screen py-12">
             <div className="max-w-6xl mx-auto px-8">
               <SplitHeadline as="h2" className="mb-16">
                 {`Selected\nprojects`}
@@ -91,12 +89,12 @@ stormy skies"
                 ))}
               </div>
             </div>
-          </CurvedSection>
+          </CurvedComponent>
         </div>
 
         <div id="projects" className="flex flex-col gap-4">
           <SectionEntryHeader sectionId="projects" />
-          <CurvedSection className="min-h-[120vh] py-12">
+          <CurvedComponent className="min-h-[120vh] py-12">
             <div className="max-w-6xl mx-auto px-8">
               <SplitHeadline as="h2" className="mb-16">
                 {`Featured\nwork`}
@@ -126,12 +124,12 @@ stormy skies"
                 ))}
               </div>
             </div>
-          </CurvedSection>
+          </CurvedComponent>
         </div>
 
         <div id="contact" className="flex flex-col gap-4">
           <SectionEntryHeader sectionId="contact" />
-          <CurvedSection className="min-h-[80vh] py-12">
+          <CurvedComponent className="min-h-[80vh] py-12">
             <div className="max-w-6xl mx-auto px-8 text-center">
               <SplitHeadline as="h2" className="mb-16">
                 {`Let's work\ntogether`}
@@ -155,7 +153,7 @@ stormy skies"
                 </div>
               </div>
             </div>
-          </CurvedSection>
+          </CurvedComponent>
         </div>
 
       </div>
