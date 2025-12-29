@@ -34,7 +34,7 @@ export function AboutMotivation() {
       {/* mission section */}
       <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-6 md:gap-12 mb-8">
         <div 
-          className="text-sm text-white/50 font-medium transition-all duration-500"
+          className="text-md text-white/90 font-medium transition-all duration-500"
           style={{ opacity: stage >= 1 ? 1 : 0 }}
         >
           My Mission
@@ -63,8 +63,8 @@ export function AboutMotivation() {
           className="flex flex-col gap-1 transition-all duration-500"
           style={{ opacity: stage >= 2 ? 1 : 0 }}
         >
-          <span className="text-xs px-2 py-0.5 rounded-full border border-white/30 text-white/50 w-fit">01</span>
-          <span className="text-sm text-white/50 font-medium">Challenge</span>
+          <span className="text-sm px-3 py-0.5 rounded-full border border-white/60 text-white/60 w-fit">01</span>
+          <span className="text-md text-white/90 font-medium">Challenge</span>
         </div>
         <div 
           className="transition-all duration-700 ease-out"
@@ -100,8 +100,8 @@ export function AboutMotivation() {
           className="flex flex-col gap-1 transition-all duration-500"
           style={{ opacity: stage >= 4 ? 1 : 0 }}
         >
-          <span className="text-xs px-2 py-0.5 rounded-full border border-white/30 text-white/50 w-fit">02</span>
-          <span className="text-sm text-white/50 font-medium">Goal</span>
+          <span className="text-sm px-3 py-0.5 rounded-full border border-white/60 text-white/60 w-fit">02</span>
+          <span className="text-md text-white/90 font-medium">Goal</span>
         </div>
         <div 
           className="transition-all duration-700 ease-out"
