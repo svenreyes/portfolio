@@ -6,32 +6,38 @@ const pillars = [
   {
     id: '01',
     title: 'Systems Thinking',
-    description: [
-      'I focus on how components interact — not just how they work in isolation.',
-      'From data flow to failure modes, I design with the full system in mind.',
-    ],
+    content: {
+      before: 'I focus on how ',
+      highlight: 'components interact',
+      after: ' — not just how they work in isolation. From data flow to failure modes, I design with the full system in mind.',
+    },
   },
   {
     id: '02',
     title: 'Backend & Infrastructure',
-    description: [
-      'I enjoy building reliable backend systems, APIs, and services that form a solid foundation for products — emphasizing correctness, performance, and maintainability.',
-    ],
+    content: {
+      before: 'I build ',
+      highlight: 'reliable systems',
+      after: ', APIs, and services that form a solid foundation — emphasizing correctness, performance, and maintainability.',
+    },
   },
   {
     id: '03',
     title: 'Web & Interfaces',
-    description: [
-      'On the frontend, I prioritize clarity and responsiveness.',
-      'Interfaces should feel intentional, fast, and easy to reason about.',
-    ],
+    content: {
+      before: 'On the frontend, I prioritize ',
+      highlight: 'clarity and speed',
+      after: '. Interfaces should feel intentional, fast, and easy to reason about.',
+    },
   },
   {
     id: '04',
     title: 'Ownership & Iteration',
-    description: [
-      'I like owning problems end-to-end — iterating quickly, learning from feedback, and refining solutions over time instead of overengineering upfront.',
-    ],
+    content: {
+      before: 'I own problems ',
+      highlight: 'end-to-end',
+      after: ' — iterating quickly, learning from feedback, and refining over time instead of overengineering upfront.',
+    },
   },
 ];
 
@@ -39,69 +45,75 @@ export function ApproachPillarsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="relative w-full border border-white/20 rounded-[32px] overflow-hidden transition-colors duration-500 hover:border-white/30">
-      {/* tabs row built into top of component */}
-      <div className="grid grid-cols-4 border-b border-white/10">
-        {pillars.map((pillar, i) => (
-          <button
-            key={pillar.id}
-            onClick={() => setActiveIndex(i)}
-            className={`
-              flex items-center justify-between py-3 px-4
-              transition-all duration-300
-              ${i < pillars.length - 1 ? 'border-r border-white/10' : ''}
-              ${activeIndex === i 
-                ? 'bg-white/10' 
-                : 'bg-transparent hover:bg-white/5'
-              }
-            `}
-          >
-            <span className={`
-              text-xs md:text-sm font-medium transition-all duration-300
-              ${activeIndex === i ? 'text-white' : 'text-white/40'}
-            `}>
-              {pillar.title}
-            </span>
-            
-            <span className={`
-              text-[10px] md:text-xs px-2 py-0.5 rounded-full border transition-all duration-300
-              ${activeIndex === i 
-                ? 'border-white text-white' 
-                : 'border-white/30 text-white/40'
-              }
-            `}>
-              {pillar.id}
-            </span>
-          </button>
-        ))}
+    <div className="relative w-full">
+      {/* tabs row - no gap */}
+      <div className="flex">
+        {pillars.map((pillar, i) => {
+          const isActive = activeIndex === i;
+          return (
+            <button
+              key={pillar.id}
+              onClick={() => setActiveIndex(i)}
+              className={`
+                flex-1 flex items-center justify-between py-4 px-5
+                border border-white/20 rounded-t-2xl
+                transition-all duration-300
+                hover:bg-white/5
+                ${isActive ? 'border-b-transparent' : ''}
+                ${i > 0 ? '-ml-[1px]' : ''}
+              `}
+            >
+              <span className={`
+                text-sm font-medium transition-all duration-300
+                ${isActive ? 'text-white' : 'text-white/40'}
+              `}>
+                {pillar.title}
+              </span>
+              
+              <span className={`
+                text-xs px-3 py-1 rounded-full border transition-all duration-300
+                ${isActive 
+                  ? 'border-white text-white' 
+                  : 'border-white/30 text-white/40'
+                }
+              `}>
+                {pillar.id}
+              </span>
+            </button>
+          );
+        })}
       </div>
 
-      {/* content */}
-      <div className="p-6 md:p-10 min-h-[60vh] flex flex-col justify-center">
-        {pillars.map((pillar, i) => (
-          <div
-            key={pillar.id}
-            className={`
-              transition-all duration-500 ease-out
-              ${activeIndex === i ? 'block' : 'hidden'}
-            `}
-          >
-            <h3 className="text-[clamp(2rem,6vw,5rem)] font-light text-white leading-[1.1] mb-8">
-              {pillar.title}
-            </h3>
-            <div className="space-y-4 max-w-2xl">
-              {pillar.description.map((para, j) => (
-                <p 
-                  key={j} 
-                  className="text-base md:text-lg font-light text-white/60 leading-relaxed"
-                >
-                  {para}
-                </p>
-              ))}
+      {/* content area */}
+      <div className="border border-white/20 border-t-0 rounded-b-[32px] p-8 md:p-12 min-h-[50vh] flex flex-col justify-between">
+        {/* main content */}
+        <div className="flex-1 flex items-center">
+          {pillars.map((pillar, i) => (
+            <div
+              key={pillar.id}
+              className={`
+                transition-all duration-500 ease-out
+                ${activeIndex === i ? 'block' : 'hidden'}
+              `}
+            >
+              <p className="text-[clamp(1.5rem,5vw,4rem)] font-light text-white leading-[1.2]">
+                {pillar.content.before}
+                <span className="text-white/50">{pillar.content.highlight}</span>
+                {pillar.content.after}
+              </p>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
+        {/* footer */}
+        <div className="flex justify-between items-center pt-8">
+          <span className="text-white/40 text-sm">(Approach)</span>
+          <span className="text-white/40 text-sm flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-white" />
+            0{activeIndex + 1} / 0{pillars.length}
+          </span>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
