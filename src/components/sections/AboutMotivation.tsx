@@ -3,22 +3,20 @@
 import { useEffect, useRef, useState } from 'react';
 
 export function AboutMotivation() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [bodyStage, setBodyStage] = useState(0);
+  const [stage, setStage] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
-          // stagger body paragraphs
-          setTimeout(() => setBodyStage(1), 500);
-          setTimeout(() => setBodyStage(2), 800);
-          setTimeout(() => setBodyStage(3), 1100);
+          setStage(1);
+          setTimeout(() => setStage(2), 400);
+          setTimeout(() => setStage(3), 800);
+          setTimeout(() => setStage(4), 1200);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.2 }
     );
 
     if (sectionRef.current) {
@@ -28,67 +26,100 @@ export function AboutMotivation() {
     return () => observer.disconnect();
   }, []);
 
-  const headlineLines = ['I enjoy turning', 'ideas into systems.'];
-
   return (
     <div 
       ref={sectionRef}
-      className="relative w-full min-h-screen flex flex-col justify-center p-8 md:p-12 lg:p-16"
+      className="relative w-full py-12 md:py-20 px-6 md:px-10"
     >
-      <div className="max-w-5xl">
-        {/* headline with scale-in effect */}
-        <h2 className="mb-12 md:mb-16">
-          {headlineLines.map((line, i) => (
-            <span
-              key={i}
-              className="block text-[clamp(2.5rem,8vw,6rem)] font-light leading-[1.05] tracking-tight text-white transition-all duration-700 ease-out"
-              style={{
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'scale(1)' : 'scale(0.98)',
-                transitionDelay: `${i * 100}ms`,
-              }}
-            >
-              {line}
-            </span>
-          ))}
+      {/* mission section */}
+      <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-6 md:gap-12 mb-8">
+        <div 
+          className="text-sm text-white/50 font-medium transition-all duration-500"
+          style={{ opacity: stage >= 1 ? 1 : 0 }}
+        >
+          My Mission
+        </div>
+        <h2 
+          className="text-[clamp(1.75rem,5vw,3.5rem)] font-light leading-[1.15] text-white transition-all duration-700 ease-out"
+          style={{
+            opacity: stage >= 1 ? 1 : 0,
+            transform: stage >= 1 ? 'translateY(0)' : 'translateY(20px)',
+          }}
+        >
+          I'm building software to turn<br />
+          complex ideas into systems<br />
+          people can trust.
         </h2>
+      </div>
 
-        {/* body paragraphs stagger in */}
-        <div className="max-w-2xl space-y-6">
-          <p 
-            className="text-base md:text-lg font-light leading-relaxed text-white transition-all duration-600 ease-out"
-            style={{
-              opacity: bodyStage >= 1 ? 0.7 : 0,
-              transform: bodyStage >= 1 ? 'translateY(0)' : 'translateY(12px)',
-            }}
-          >
-            I like working on problems where structure matters —
-            where small decisions compound into something meaningful.
+      {/* divider 1 */}
+      <div className="h-px bg-white/20 mb-8 origin-left transition-transform duration-700 ease-out" 
+        style={{ transform: stage >= 2 ? 'scaleX(1)' : 'scaleX(0)' }}
+      />
+
+      {/* challenge section */}
+      <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-6 md:gap-12 mb-8">
+        <div 
+          className="flex flex-col gap-1 transition-all duration-500"
+          style={{ opacity: stage >= 2 ? 1 : 0 }}
+        >
+          <span className="text-xs px-2 py-0.5 rounded-full border border-white/30 text-white/50 w-fit">01</span>
+          <span className="text-sm text-white/50 font-medium">Challenge</span>
+        </div>
+        <div 
+          className="transition-all duration-700 ease-out"
+          style={{
+            opacity: stage >= 2 ? 1 : 0,
+            transform: stage >= 2 ? 'translateY(0)' : 'translateY(16px)',
+          }}
+        >
+          <p className="text-[clamp(1.5rem,4vw,2.75rem)] font-light leading-[1.2] text-white mb-4">
+            Modern software is often overengineered,<br />
+            hard to reason about, and fragile at scale.
           </p>
           <p 
-            className="text-base md:text-lg font-light leading-relaxed text-white transition-all duration-600 ease-out"
-            style={{
-              opacity: bodyStage >= 2 ? 0.7 : 0,
-              transform: bodyStage >= 2 ? 'translateY(0)' : 'translateY(12px)',
+            className="text-[clamp(1.5rem,4vw,2.75rem)] font-light leading-[1.2] text-white/50 transition-all duration-500"
+            style={{ 
+              opacity: stage >= 3 ? 1 : 0,
+              transform: stage >= 3 ? 'translateY(0)' : 'translateY(8px)',
             }}
           >
-            Building software gives me a way to think clearly, iterate quickly,
-            and ship things that people actually use.
+            Complexity grows faster than clarity.
           </p>
-          
-          {/* closing line */}
-          <p 
-            className="text-sm font-light leading-relaxed text-white/50 pt-4 transition-all duration-600 ease-out"
-            style={{
-              opacity: bodyStage >= 3 ? 1 : 0,
-              transform: bodyStage >= 3 ? 'translateY(0)' : 'translateY(12px)',
-            }}
-          >
-            The process matters as much as the outcome.
+        </div>
+      </div>
+
+      {/* divider 2 */}
+      <div className="h-px bg-white/20 mb-8 origin-left transition-transform duration-700 ease-out" 
+        style={{ transform: stage >= 3 ? 'scaleX(1)' : 'scaleX(0)' }}
+      />
+
+      {/* goal section */}
+      <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-6 md:gap-12">
+        <div 
+          className="flex flex-col gap-1 transition-all duration-500"
+          style={{ opacity: stage >= 4 ? 1 : 0 }}
+        >
+          <span className="text-xs px-2 py-0.5 rounded-full border border-white/30 text-white/50 w-fit">02</span>
+          <span className="text-sm text-white/50 font-medium">Goal</span>
+        </div>
+        <div 
+          className="transition-all duration-700 ease-out"
+          style={{
+            opacity: stage >= 4 ? 1 : 0,
+            transform: stage >= 4 ? 'translateY(0)' : 'translateY(16px)',
+          }}
+        >
+          <p className="text-[clamp(1.5rem,4vw,2.75rem)] font-light leading-[1.2] text-white mb-6">
+            Build systems that are simple to understand,<br />
+            resilient under pressure,<br />
+            and designed with long-term ownership in mind.
+          </p>
+          <p className="text-base text-white/40 font-light">
+            Software that works — and keeps working.
           </p>
         </div>
       </div>
     </div>
   );
 }
-
