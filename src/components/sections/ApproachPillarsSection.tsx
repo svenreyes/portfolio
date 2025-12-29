@@ -9,7 +9,7 @@ const pillars = [
     content: {
       before: 'I focus on how ',
       highlight: 'components interact',
-      after: ' — not just how they work in isolation. From data flow to failure modes, I design with the full system in mind.',
+      after: ' not just how they work in isolation. From data flow to failure modes, I design with the full system in mind.',
     },
   },
   {
@@ -18,7 +18,7 @@ const pillars = [
     content: {
       before: 'I build ',
       highlight: 'reliable systems',
-      after: ', APIs, and services that form a solid foundation — emphasizing correctness, performance, and maintainability.',
+      after: ', APIs, and services that form a solid foundation, emphasizing correctness, performance, and maintainability.',
     },
   },
   {
@@ -36,7 +36,7 @@ const pillars = [
     content: {
       before: 'I own problems ',
       highlight: 'end-to-end',
-      after: ' — iterating quickly, learning from feedback, and refining over time instead of overengineering upfront.',
+      after: ' iterating quickly, learning from feedback, and refining over time instead of overengineering upfront.',
     },
   },
 ];
