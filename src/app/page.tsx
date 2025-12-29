@@ -12,6 +12,8 @@ import { AboutMotivation } from '@/components/sections/AboutMotivation';
 import { ApproachBar } from '@/components/sections/ApproachBar';
 import { ApproachSubline } from '@/components/sections/ApproachSubline';
 import { ApproachPillarsSection } from '@/components/sections/ApproachPillarsSection';
+import { CapabilitiesHeader } from '@/components/sections/CapabilitiesHeader';
+import { CapabilitiesGrid } from '@/components/sections/CapabilitiesGrid';
 
 export default function Home() {
   return (
@@ -55,6 +57,8 @@ stormy skies"
             <ApproachSubline />
           </CurvedComponent>
           <ApproachPillarsSection />
+          <CapabilitiesHeader />
+          <CapabilitiesGrid />
         </div>
 
         <div id="experience" className="flex flex-col gap-4">
