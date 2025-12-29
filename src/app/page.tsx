@@ -7,6 +7,11 @@ import { SplitHeadline } from '@/components/typography/SplitHeadline';
 import { BodyText } from '@/components/typography/BodyText';
 import { Hero3D } from '@/components/sections/Hero3D';
 import { AboutHero } from '@/components/sections/AboutHero';
+import { AboutWhatIDo } from '@/components/sections/AboutWhatIDo';
+import { AboutMotivation } from '@/components/sections/AboutMotivation';
+import { ApproachBar } from '@/components/sections/ApproachBar';
+import { ApproachSubline } from '@/components/sections/ApproachSubline';
+import { ApproachPillars } from '@/components/sections/ApproachPillars';
 
 export default function Home() {
   return (
@@ -27,48 +32,30 @@ stormy skies"
           <CurvedSection className="min-h-screen">
             <AboutHero />
           </CurvedSection>
+          <CurvedSection className="min-h-screen">
+            <AboutWhatIDo />
+          </CurvedSection>
+          <CurvedSection className="min-h-screen">
+            <AboutMotivation />
+          </CurvedSection>
         </div>
 
         <div id="approach" className="flex flex-col gap-4">
           <SectionEntryHeader sectionId="approach" />
-          <CurvedSection className="min-h-[180vh] py-12">
-            <div className="max-w-6xl mx-auto px-8">
-              <SplitHeadline as="h2" className="mb-16">
-                {`Thoughtful\nby design`}
-              </SplitHeadline>
-
-              <div className="space-y-48">
-                <div className="reveal">
-                  <h3 className="text-[clamp(1.5rem,3vw,2.5rem)] text-white/90 font-light mb-6">
-                    Discovery
-                  </h3>
-                  <BodyText>
-                    We start by listening. Understanding your challenges, goals, and vision
-                    helps us create solutions that truly fit.
-                  </BodyText>
-                </div>
-
-                <div className="reveal">
-                  <h3 className="text-[clamp(1.5rem,3vw,2.5rem)] text-white/90 font-light mb-6">
-                    Design
-                  </h3>
-                  <BodyText>
-                    Translating insights into beautiful, functional interfaces. Every decision
-                    is intentional, every interaction meaningful.
-                  </BodyText>
-                </div>
-
-                <div className="reveal">
-                  <h3 className="text-[clamp(1.5rem,3vw,2.5rem)] text-white/90 font-light mb-6">
-                    Development
-                  </h3>
-                  <BodyText>
-                    Bringing designs to life with clean code and attention to detail.
-                    Performance and accessibility are never afterthoughts.
-                  </BodyText>
-                </div>
-              </div>
-            </div>
+          <CurvedSection>
+            <ApproachBar text="Systems-first" leftLabel="(Systems)" rightLabel="(First)" />
+          </CurvedSection>
+          <CurvedSection>
+            <ApproachBar text="End-to-end" leftLabel="(End)" rightLabel="(End)" />
+          </CurvedSection>
+          <CurvedSection>
+            <ApproachBar text="Built with intent" leftLabel="(Built)" rightLabel="(Intent)" />
+          </CurvedSection>
+          <CurvedSection>
+            <ApproachSubline />
+          </CurvedSection>
+          <CurvedSection className="min-h-screen">
+            <ApproachPillars />
           </CurvedSection>
         </div>
 
