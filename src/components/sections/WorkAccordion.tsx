@@ -8,22 +8,54 @@ interface WorkItem {
   id: string;
   company: string;
   role: string;
+  description: string;
+  color: string;
 }
 
 const workItems: WorkItem[] = [
-  { id: 'sas', company: 'SAS', role: 'Software Engineering Intern' },
-  { id: 'extend', company: 'Extend', role: 'Solution Engineer Intern' },
-  { id: 'skulpt', company: 'SKULPT', role: 'Co-Founder · Creative Technology' },
-  { id: 'blockchain', company: 'Blockchain Research — ECU', role: 'Undergraduate Research' },
-  { id: 'cv', company: 'Computer Vision Research — ECU', role: 'Undergraduate Research' },
+  { 
+    id: 'sas', 
+    company: 'SAS', 
+    role: 'Software Engineering Intern',
+    description: 'Built and tested production-level software systems with a focus on reliability, correctness, and maintainability in large-scale codebases.',
+    color: '#1E6AE1',
+  },
+  { 
+    id: 'extend', 
+    company: 'Extend', 
+    role: 'Solution Engineer Intern',
+    description: 'Developed and debugged real-world API integrations at a fast-moving startup, working closely with product and customer teams to ship solutions quickly.',
+    color: '#00C5FB',
+  },
+  { 
+    id: 'skulpt', 
+    company: 'SKULPT', 
+    role: 'Co-Founder · Creative Technology',
+    description: 'Co-founded and engineered interactive web experiences, owning technical architecture while collaborating across design, branding, and product direction.',
+    color: '#CBD1D6',
+  },
+  { 
+    id: 'blockchain', 
+    company: 'Blockchain Research — ECU', 
+    role: 'Undergraduate Research',
+    description: 'Researched smart contract reliability through metamorphic testing, evaluating how behavioral properties change across transformations in blockchain systems.',
+    color: '#D4AF37',
+  },
+  { 
+    id: 'cv', 
+    company: 'Computer Vision Research — ECU', 
+    role: 'Undergraduate Research',
+    description: 'Conducted depth-based computer vision research using an Arducam with infrared illumination, designing experiments to analyze spatial perception and depth inference.',
+    color: '#7B5CFF',
+  },
 ];
 
 // paper colors from back to front
 const paperColors = [
-  'bg-orange-500',  // back (least visible)
+  'bg-orange-500',  // back
   'bg-cyan-400',
   'bg-purple-500',
-  'bg-green-500',   // front (most visible)
+  'bg-green-500',   // front
 ];
 
 export function WorkAccordion() {
@@ -87,10 +119,8 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
         onMouseLeave={() => setIsHovered(false)}
       >
         {/* stacked paper tabs - each one leans progressively more */}
-        {/* back paper (orange) stays flat, each subsequent one leans more */}
         {paperColors.map((color, i) => {
-          // rotation increases for each paper (back=0, front=most)
-          const rotation = i * 12; // 0, 12, 24, 36 degrees
+          const rotation = i * 12;
           
           return (
             <motion.div
@@ -133,24 +163,44 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
               }
             }}
             aria-expanded={isExpanded}
-            className="w-full flex items-center justify-between p-8 md:p-10 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-inset"
+            className="w-full flex flex-col p-8 md:p-10 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-inset"
           >
-            <h3 className="text-2xl md:text-3xl font-medium text-white italic">
-              {item.company}
-            </h3>
+            {/* top row with company, role, icon */}
+            <div className="w-full flex items-center justify-between">
+              <h3 className="text-2xl md:text-3xl font-medium text-white">
+                {item.company}
+              </h3>
 
-            <span className="hidden md:block text-sm text-white/50">
-              {item.role}
-            </span>
+              <span className="hidden md:block text-sm text-white/50">
+                {item.role}
+              </span>
 
-            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white/60 text-base font-medium border border-white/20">
-              {item.company.charAt(0)}
+              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white/60 text-base font-medium border border-white/20">
+                {item.company.charAt(0)}
+              </div>
             </div>
-          </button>
 
-          <div className="md:hidden px-8 pb-6 -mt-2">
-            <span className="text-sm text-white/50">{item.role}</span>
-          </div>
+            {/* mobile role */}
+            <div className="md:hidden mt-2">
+              <span className="text-sm text-white/50">{item.role}</span>
+            </div>
+
+            {/* expanded description inside the pill */}
+            <AnimatePresence initial={false}>
+              {isExpanded && (
+                <motion.p
+                  initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                  animate={{ opacity: 1, height: 'auto', marginTop: 24 }}
+                  exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                  className="text-xl md:text-2xl font-light leading-relaxed"
+                  style={{ color: item.color }}
+                >
+                  {item.description}
+                </motion.p>
+              )}
+            </AnimatePresence>
+          </button>
         </motion.div>
       </div>
 
