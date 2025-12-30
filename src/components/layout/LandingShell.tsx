@@ -92,11 +92,11 @@ export function LandingShell({ children }: LandingShellProps) {
     <>
       <div className="fixed inset-0 bg-black z-0" />
 
-      <div className="relative z-10 h-screen overflow-hidden">
-        <div className="hidden lg:flex h-full p-4 gap-4">
+      <div className="relative z-10 h-screen overflow-x-visible overflow-y-hidden">
+        <div className="hidden lg:flex h-full p-4 gap-0 overflow-visible">
           <aside
             ref={sidebarRef}
-            className="w-[200px] flex-shrink-0 h-full overflow-y-auto overflow-x-hidden scrollbar-none"
+            className="w-[200px] flex-shrink-0 h-full overflow-y-auto overflow-x-hidden scrollbar-none relative z-10 pr-4"
           >
             <SidebarNav />
           </aside>
@@ -104,12 +104,16 @@ export function LandingShell({ children }: LandingShellProps) {
           <main
             ref={mainContentRef}
             data-scroll-container
-            className="flex-1 h-full overflow-y-auto overflow-x-hidden
+            className="flex-1 h-full pr-4
                      scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent
                      hover:scrollbar-thumb-white/30"
             style={{
               scrollbarWidth: 'thin',
               scrollbarColor: 'rgba(255, 255, 255, 0.2) transparent',
+              overflowY: 'scroll',
+              overflowX: 'visible',
+              marginLeft: '-48px',
+              paddingLeft: '48px',
             }}
           >
             {children}

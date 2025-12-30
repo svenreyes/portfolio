@@ -10,10 +10,10 @@ const SECTION_IDS = SECTIONS.map((s) => s.id);
 
 // component count and size multiplier for each section
 const SECTION_WEIGHTS: Record<string, number> = {
-  hero: 1,      // 1 large component
-  about: 3,     // 3 components (AboutHero, AboutWhatIDo, AboutMotivation)
-  approach: 7,  // 7 components (3 bars, subline, pillars, capabilities header, capabilities grid)
-  experience: 1,
+  hero: 1,
+  about: 3,
+  approach: 7,
+  experience: 5,  // 5 work accordion items
   projects: 1.5,
   contact: 1,
 };

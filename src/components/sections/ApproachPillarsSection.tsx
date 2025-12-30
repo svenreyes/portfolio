@@ -85,7 +85,7 @@ export function ApproachPillarsSection() {
       </div>
 
       {/* content area */}
-      <div className="border border-white/20 border-t-0 rounded-b-[32px] p-8 md:p-12 min-h-[50vh] flex flex-col justify-between">
+      <div className="border border-white/20 border-t-0 rounded-b-[16px] p-8 md:p-12 min-h-[50vh] flex flex-col justify-between">
         {/* main content */}
         <div className="flex-1 flex items-center">
           {pillars.map((pillar, i) => (

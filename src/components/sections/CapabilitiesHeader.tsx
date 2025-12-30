@@ -21,7 +21,7 @@ export function CapabilitiesHeader() {
   return (
     <div 
       ref={ref}
-      className="w-full py-6 md:py-8 px-6 md:px-8 flex items-center justify-between border border-white/20 rounded-[32px] transition-all duration-500 ease-out"
+      className="w-full py-6 md:py-8 px-6 md:px-8 flex items-center justify-between border border-white/20 rounded-[16px] transition-all duration-500 ease-out"
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translateX(0)' : 'translateX(-40px)',

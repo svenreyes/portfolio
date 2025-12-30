@@ -72,7 +72,7 @@ export function CapabilitiesGrid() {
       {columns.map((column, i) => (
         <div
           key={column.id}
-          className="border border-white/20 rounded-[24px] p-6 py-16 transition-all duration-500 ease-out hover:border-white/30 group"
+          className="border border-white/20 rounded-[16px] p-6 py-16 transition-all duration-500 ease-out hover:border-white/30 group"
           style={{
             opacity: visibleColumns > i ? 1 : 0,
             transform: visibleColumns > i ? 'translateY(0)' : 'translateY(16px)',
