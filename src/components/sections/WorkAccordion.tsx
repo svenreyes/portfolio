@@ -79,7 +79,7 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
       <div 
         className="relative"
         style={{ 
-          perspective: '4000px', 
+          perspective: '8000px', 
           overflow: 'visible',
           transformStyle: 'preserve-3d',
         }}
@@ -90,7 +90,7 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
         {/* back paper (orange) stays flat, each subsequent one leans more */}
         {paperColors.map((color, i) => {
           // rotation increases for each paper (back=0, front=most)
-          const rotation = i * 8; // 0, 8, 16, 24 degrees
+          const rotation = i * 12; // 0, 12, 24, 36 degrees
           
           return (
             <motion.div
@@ -115,7 +115,7 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
         <motion.div
           className="relative w-full rounded-[16px] border border-white/20 bg-black"
           animate={{
-            rotateX: showPeek ? -35 : 0,
+            rotateX: showPeek ? -50 : 0,
           }}
           transition={{ type: 'spring', stiffness: 300, damping: 25 }}
           style={{ 
