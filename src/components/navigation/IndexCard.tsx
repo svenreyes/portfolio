@@ -34,7 +34,7 @@ export function IndexCard({
       className={`
         group relative w-full flex-shrink-0
         flex flex-col items-start 
-        rounded-2xl border
+        rounded-[16px] border
         transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
         overflow-hidden
         ${isActive

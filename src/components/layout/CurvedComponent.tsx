@@ -12,7 +12,7 @@ export function CurvedComponent({ children, className = '', id }: CurvedComponen
       id={id}
       className={`
         relative w-full
-        border border-white/20 rounded-[32px]
+        border border-white/20 rounded-[16px]
         transition-colors duration-500
         hover:border-white/30
         ${className}
