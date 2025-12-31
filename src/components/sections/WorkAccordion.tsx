@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CurvedComponent } from '@/components/layout/CurvedComponent';
 
@@ -10,6 +10,7 @@ interface WorkItem {
   role: string;
   description: string;
   color: string;
+  video?: string;
 }
 
 const workItems: WorkItem[] = [
@@ -19,6 +20,7 @@ const workItems: WorkItem[] = [
     role: 'Software Engineering Intern',
     description: 'Built and tested production-level software systems with a focus on reliability, correctness, and maintainability in large-scale codebases.',
     color: '#1E6AE1',
+    video: '/video/SAS.mp4',
   },
   { 
     id: 'extend', 
@@ -57,6 +59,30 @@ const paperColors = [
   'bg-purple-500',
   'bg-green-500',   // front
 ];
+
+function VideoPlayer({ src }: { src: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(() => {
+        // autoplay blocked, that's ok
+      });
+    }
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      muted
+      loop
+      playsInline
+      className="w-full h-full object-cover"
+    />
+  );
+}
 
 export function WorkAccordion() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -214,6 +240,12 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             className="flex flex-col gap-4 overflow-hidden"
           >
+            {/* video component if available */}
+            {item.video && (
+              <CurvedComponent className="p-0 overflow-hidden max-h-[600px]">
+                <VideoPlayer src={item.video} />
+              </CurvedComponent>
+            )}
             <CurvedComponent className="p-6">
               <h4 className="text-sm uppercase tracking-wider text-white/40 mb-2">Overview</h4>
               <p className="text-white/70 text-sm leading-relaxed">
