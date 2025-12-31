@@ -11,6 +11,12 @@ export interface CompanyTheme {
   accent1: string;
   accent2: string;
   accent3: string;
+  componentBg?: string;
+  hoverColor?: string;
+  hoverTextColor?: string;
+  noBorder?: boolean;
+  glow?: boolean;
+  headlineFont?: string;
 }
 
 const defaultTheme: CompanyTheme = {
@@ -35,16 +41,23 @@ export const companyThemes: Record<string, CompanyTheme> = {
     accent1: '#4398F9',
     accent2: '#C4DEFD',
     accent3: '#4398F9',
+    headlineFont: 'var(--font-anova-bold)',
   },
   extend: {
     id: 'extend',
-    background: '#001a2e',
-    border: '#00C5FB',
-    textPrimary: '#00C5FB',
-    textLight: 'rgba(0, 197, 251, 0.6)',
+    background: '#151516',
+    border: 'transparent',
+    textPrimary: '#ffffff',
+    textLight: '#ffffff',
     accent1: '#00C5FB',
-    accent2: '#003d5c',
-    accent3: '#00e5ff',
+    accent2: '#00C5FB',
+    accent3: '#000000',
+    componentBg: '#000000',
+    hoverColor: '#00C5FB',
+    hoverTextColor: '#000000',
+    noBorder: true,
+    glow: true,
+    headlineFont: 'var(--font-nunito-sans)',
   },
   skulpt: {
     id: 'skulpt',

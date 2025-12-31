@@ -32,6 +32,8 @@ const workItems: WorkItem[] = [
     role: 'Solution Engineer Intern',
     description: 'Developed and debugged real-world API integrations at a fast-moving startup, working closely with product and customer teams to ship solutions quickly.',
     color: '#00C5FB',
+    video: '/video/extend.mp4',
+    logo: '/extendlogo.svg',
   },
   { 
     id: 'skulpt', 
@@ -64,7 +66,7 @@ const paperColors = [
   'bg-green-500',   // front
 ];
 
-function VideoPlayer({ src }: { src: string }) {
+function VideoPlayer({ src, logo }: { src: string; logo?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -86,14 +88,16 @@ function VideoPlayer({ src }: { src: string }) {
         playsInline
         className="absolute bottom-0 left-0 w-full min-h-full object-cover"
       />
-      {/* centered logo overlay */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <img 
-          src="/Asset 1.svg" 
-          alt="" 
-          className="w-40 h-auto opacity-90"
-        />
-      </div>
+      {/* centered logo overlay - only for SAS */}
+      {logo && (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <img 
+            src={logo} 
+            alt="" 
+            className="w-40 h-auto opacity-90"
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -303,14 +307,22 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
           >
             {/* video component if available */}
             {item.video && (
-              <CurvedComponent className="p-0 overflow-hidden">
-                <VideoPlayer src={item.video} />
-              </CurvedComponent>
+              <div className="p-0 overflow-hidden rounded-[16px]" style={{ 
+                borderWidth: isThemed && theme.noBorder ? '0px' : '1px',
+                borderStyle: isThemed && theme.noBorder ? 'none' : 'solid',
+                borderColor: isThemed && theme.noBorder ? 'transparent' : (isThemed ? theme.border : 'rgba(255, 255, 255, 0.2)'),
+                backgroundColor: isThemed && theme.componentBg ? theme.componentBg : 'transparent',
+              }}>
+                <VideoPlayer src={item.video} logo={item.id === 'sas' ? item.logo : undefined} />
+              </div>
             )}
             <CurvedComponent className="p-6">
               <h4 
-                className="text-base uppercase tracking-wider mb-2 transition-colors duration-500"
-                style={{ color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.4)' }}
+                className="text-base uppercase tracking-wider mb-2 transition-colors duration-500 font-bold"
+                style={{ 
+                  color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.4)',
+                  fontFamily: isThemed && theme.headlineFont ? theme.headlineFont : undefined,
+                }}
               >
                 Overview
               </h4>
@@ -325,8 +337,11 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
 
             <CurvedComponent className="p-6">
               <h4 
-                className="text-base uppercase tracking-wider mb-2 transition-colors duration-500"
-                style={{ color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.4)' }}
+                className="text-base uppercase tracking-wider mb-2 transition-colors duration-500 font-bold"
+                style={{ 
+                  color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.4)',
+                  fontFamily: isThemed && theme.headlineFont ? theme.headlineFont : undefined,
+                }}
               >
                 What I worked on
               </h4>
@@ -341,8 +356,11 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
 
             <CurvedComponent className="p-6">
               <h4 
-                className="text-base uppercase tracking-wider mb-3 transition-colors duration-500"
-                style={{ color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.4)' }}
+                className="text-base uppercase tracking-wider mb-3 transition-colors duration-500 font-bold"
+                style={{ 
+                  color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.4)',
+                  fontFamily: isThemed && theme.headlineFont ? theme.headlineFont : undefined,
+                }}
               >
                 Focus
               </h4>

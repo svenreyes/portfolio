@@ -179,3 +179,8 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Extend theme hover text color override */
+[data-theme-hover="true"] * {
+  color: #000000 !important;
+}

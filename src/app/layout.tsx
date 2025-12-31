@@ -20,6 +20,18 @@ const nordiqueLight = localFont({
   weight: "300",
 });
 
+const anovaBold = localFont({
+  src: "../../public/fonts/sas/Anova-Bold.otf",
+  variable: "--font-anova-bold",
+  weight: "700",
+});
+
+const nunitoSans = localFont({
+  src: "../../public/fonts/extend/NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf",
+  variable: "--font-nunito-sans",
+  weight: "100 900",
+});
+
 export const metadata: Metadata = {
   title: "Sven Reyes - Portfolio",
   description: "Portfolio of Sven Reyes",
@@ -33,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nordiqueRegular.variable} ${nordiqueSemibold.variable} ${nordiqueLight.variable} antialiased`}
+        className={`${nordiqueRegular.variable} ${nordiqueSemibold.variable} ${nordiqueLight.variable} ${anovaBold.variable} ${nunitoSans.variable} antialiased`}
         style={{ fontFamily: "var(--font-nordique)" }}
       >
         {children}
