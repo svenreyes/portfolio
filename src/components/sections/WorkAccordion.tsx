@@ -73,14 +73,24 @@ function VideoPlayer({ src }: { src: string }) {
   }, []);
 
   return (
-    <video
-      ref={videoRef}
-      src={src}
-      muted
-      loop
-      playsInline
-      className="w-full h-full object-cover"
-    />
+    <div className="relative w-full h-[600px] overflow-hidden">
+      <video
+        ref={videoRef}
+        src={src}
+        muted
+        loop
+        playsInline
+        className="absolute bottom-0 left-0 w-full min-h-full object-cover"
+      />
+      {/* centered logo overlay */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <img 
+          src="/Asset 1.svg" 
+          alt="" 
+          className="w-40 h-auto opacity-90"
+        />
+      </div>
+    </div>
   );
 }
 
@@ -242,7 +252,7 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
           >
             {/* video component if available */}
             {item.video && (
-              <CurvedComponent className="p-0 overflow-hidden max-h-[600px]">
+              <CurvedComponent className="p-0 overflow-hidden">
                 <VideoPlayer src={item.video} />
               </CurvedComponent>
             )}
