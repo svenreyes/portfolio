@@ -15,9 +15,11 @@ import { ApproachPillarsSection } from '@/components/sections/ApproachPillarsSec
 import { CapabilitiesHeader } from '@/components/sections/CapabilitiesHeader';
 import { CapabilitiesGrid } from '@/components/sections/CapabilitiesGrid';
 import { WorkAccordion } from '@/components/sections/WorkAccordion';
+import { ThemeProvider } from '@/context/ThemeContext';
 
 export default function Home() {
   return (
+    <ThemeProvider>
     <LandingShell>
       <div className="flex flex-col gap-8 overflow-visible">
         <CurvedComponent id="hero" className="min-h-[90vh]">
@@ -133,5 +135,6 @@ stormy skies"
 
       </div>
     </LandingShell>
+    </ThemeProvider>
   );
 }

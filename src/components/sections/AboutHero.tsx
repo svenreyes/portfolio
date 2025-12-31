@@ -12,7 +12,7 @@ export function AboutHero() {
         {/* first divider */}
         <div className="w-full h-px bg-white/20 mt-4" />
       </div>
-
+        
       {/* middle section */}
       <div className="flex flex-col">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 py-4">
@@ -27,24 +27,24 @@ export function AboutHero() {
             Sven
           </span>
         </div>
-
+        
         {/* second divider */}
         <div className="w-full h-px bg-white/20" />
       </div>
-
+        
       {/* bottom headline */}
       <div className="flex flex-col">
         <h2 className="text-[clamp(3rem,14vw,10rem)] font-light italic leading-[0.85] tracking-tight text-white">
           Reyes
         </h2>
-
-        {/* footer */}
+      
+      {/* footer */}
         <div className="flex justify-between items-end mt-4">
           <span className="text-white/50 text-sm">(About)</span>
           <span className="text-white/50 text-sm flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-white" />
-            01 / 05
-          </span>
+          01 / 05
+        </span>
         </div>
       </div>
     </div>

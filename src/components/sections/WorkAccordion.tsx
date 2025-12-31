@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CurvedComponent } from '@/components/layout/CurvedComponent';
+import { useTheme } from '@/context/ThemeContext';
+import { useSectionProgress } from '@/hooks/useSectionProgress';
 
 interface WorkItem {
   id: string;
@@ -94,12 +96,26 @@ function VideoPlayer({ src }: { src: string }) {
   );
 }
 
+const SECTION_IDS = ['hero', 'about', 'approach', 'experience', 'projects', 'contact'];
+
 export function WorkAccordion() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const { setThemeById } = useTheme();
+  const { id: activeSection } = useSectionProgress(SECTION_IDS);
 
   const handleToggle = (id: string) => {
-    setExpandedId(expandedId === id ? null : id);
+    const newId = expandedId === id ? null : id;
+    setExpandedId(newId);
+    setThemeById(newId);
   };
+
+  // reset theme when scrolling away from experience section
+  useEffect(() => {
+    if (activeSection !== 'experience' && expandedId !== null) {
+      setExpandedId(null);
+      setThemeById(null);
+    }
+  }, [activeSection, expandedId, setThemeById]);
 
   return (
     <div 
@@ -129,6 +145,7 @@ interface WorkPillProps {
 function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
   const [isHovered, setIsHovered] = useState(false);
   const showPeek = isHovered && !isExpanded;
+  const { theme, isThemed } = useTheme();
 
   return (
     <div
@@ -179,7 +196,7 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
 
         {/* main pill cover */}
         <motion.div
-          className="relative w-full rounded-[16px] border border-white/20 bg-black"
+          className="relative w-full rounded-[16px] transition-colors duration-500"
           animate={{
             rotateX: showPeek ? -50 : 0,
           }}
@@ -188,6 +205,10 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
             transformOrigin: 'bottom center',
             transformStyle: 'preserve-3d',
             zIndex: 10,
+            backgroundColor: isThemed ? theme.accent3 : '#000000',
+            borderWidth: '1px',
+            borderStyle: 'solid',
+            borderColor: isThemed ? theme.border : 'rgba(255, 255, 255, 0.2)',
           }}
         >
           <button
@@ -203,22 +224,42 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
           >
             {/* top row with company, role, icon */}
             <div className="w-full flex items-center justify-between">
-              <h3 className="text-2xl md:text-3xl font-medium text-white">
+              <h3 
+                className="text-2xl md:text-3xl font-medium transition-colors duration-500"
+                style={{ color: isThemed ? theme.textPrimary : '#ffffff' }}
+              >
                 {item.company}
               </h3>
 
-              <span className="hidden md:block text-sm text-white/50">
+              <span 
+                className="hidden md:block text-sm transition-colors duration-500"
+                style={{ color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.5)' }}
+              >
                 {item.role}
               </span>
 
-              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white/60 text-base font-medium border border-white/20">
+              <div 
+                className="w-12 h-12 rounded-full flex items-center justify-center text-base font-medium transition-colors duration-500"
+                style={{
+                  backgroundColor: isThemed ? `${theme.border}20` : 'rgba(255, 255, 255, 0.1)',
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: isThemed ? theme.border : 'rgba(255, 255, 255, 0.2)',
+                  color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.6)',
+                }}
+              >
                 {item.company.charAt(0)}
               </div>
             </div>
 
             {/* mobile role */}
             <div className="md:hidden mt-2">
-              <span className="text-sm text-white/50">{item.role}</span>
+              <span 
+                className="text-sm transition-colors duration-500"
+                style={{ color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.5)' }}
+              >
+                {item.role}
+              </span>
             </div>
 
             {/* expanded description inside the pill */}
@@ -257,28 +298,56 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
               </CurvedComponent>
             )}
             <CurvedComponent className="p-6">
-              <h4 className="text-sm uppercase tracking-wider text-white/40 mb-2">Overview</h4>
-              <p className="text-white/70 text-sm leading-relaxed">
+              <h4 
+                className="text-sm uppercase tracking-wider mb-2 transition-colors duration-500"
+                style={{ color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.4)' }}
+              >
+                Overview
+              </h4>
+              <p 
+                className="text-sm leading-relaxed transition-colors duration-500"
+                style={{ color: isThemed ? theme.textPrimary : 'rgba(255, 255, 255, 0.7)' }}
+              >
                 Built and maintained production systems, collaborated with cross-functional teams, 
                 and delivered high-quality code that improved platform reliability.
               </p>
             </CurvedComponent>
 
             <CurvedComponent className="p-6">
-              <h4 className="text-sm uppercase tracking-wider text-white/40 mb-2">What I worked on</h4>
-              <p className="text-white/70 text-sm leading-relaxed">
+              <h4 
+                className="text-sm uppercase tracking-wider mb-2 transition-colors duration-500"
+                style={{ color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.4)' }}
+              >
+                What I worked on
+              </h4>
+              <p 
+                className="text-sm leading-relaxed transition-colors duration-500"
+                style={{ color: isThemed ? theme.textPrimary : 'rgba(255, 255, 255, 0.7)' }}
+              >
                 Developed microservices and APIs, implemented testing strategies, 
                 optimized database queries, and shipped features used by thousands of users.
               </p>
             </CurvedComponent>
 
             <CurvedComponent className="p-6">
-              <h4 className="text-sm uppercase tracking-wider text-white/40 mb-3">Focus</h4>
+              <h4 
+                className="text-sm uppercase tracking-wider mb-3 transition-colors duration-500"
+                style={{ color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.4)' }}
+              >
+                Focus
+              </h4>
               <div className="flex flex-wrap gap-2">
                 {['Backend', 'APIs', 'Testing', 'Performance'].map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/60"
+                    className="text-xs px-3 py-1 rounded-full transition-colors duration-500"
+                    style={{
+                      backgroundColor: isThemed ? `${theme.border}10` : 'rgba(255, 255, 255, 0.05)',
+                      borderWidth: '1px',
+                      borderStyle: 'solid',
+                      borderColor: isThemed ? `${theme.border}40` : 'rgba(255, 255, 255, 0.1)',
+                      color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.6)',
+                    }}
                   >
                     {tag}
                   </span>

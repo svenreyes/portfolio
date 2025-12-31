@@ -1,5 +1,7 @@
 'use client';
 
+import { useTheme } from '@/context/ThemeContext';
+
 interface CurvedComponentProps {
   children: React.ReactNode;
   className?: string;
@@ -7,16 +9,22 @@ interface CurvedComponentProps {
 }
 
 export function CurvedComponent({ children, className = '', id }: CurvedComponentProps) {
+  const { theme, isThemed } = useTheme();
+  
   return (
     <section
       id={id}
       className={`
         relative w-full
-        border border-white/20 rounded-[16px]
-        transition-colors duration-500
-        hover:border-white/30
+        rounded-[16px]
+        transition-all duration-500
         ${className}
       `}
+      style={{
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderColor: isThemed ? theme.border : 'rgba(255, 255, 255, 0.2)',
+      }}
     >
       {children}
     </section>

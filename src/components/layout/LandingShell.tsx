@@ -9,6 +9,7 @@
 
 import { useEffect, useRef } from 'react';
 import { SidebarNav } from './SidebarNav';
+import { useTheme } from '@/context/ThemeContext';
 
 interface LandingShellProps {
   children?: React.ReactNode;
@@ -17,6 +18,7 @@ interface LandingShellProps {
 export function LandingShell({ children }: LandingShellProps) {
   const sidebarRef = useRef<HTMLDivElement>(null);
   const mainContentRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const sidebar = sidebarRef.current;
@@ -90,7 +92,10 @@ export function LandingShell({ children }: LandingShellProps) {
 
   return (
     <>
-      <div className="fixed inset-0 bg-black z-0" />
+      <div 
+        className="fixed inset-0 z-0 transition-colors duration-500" 
+        style={{ backgroundColor: theme.background }}
+      />
 
       <div className="relative z-10 h-screen overflow-x-visible overflow-y-hidden">
         <div className="hidden lg:flex h-full p-4 gap-0 overflow-visible">
