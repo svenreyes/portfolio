@@ -13,6 +13,7 @@ interface WorkItem {
   description: string;
   color: string;
   video?: string;
+  logo?: string;
 }
 
 const workItems: WorkItem[] = [
@@ -23,6 +24,7 @@ const workItems: WorkItem[] = [
     description: 'Built and tested production-level software systems with a focus on reliability, correctness, and maintainability in large-scale codebases.',
     color: '#1E6AE1',
     video: '/video/SAS.mp4',
+    logo: '/Asset 1.svg',
   },
   { 
     id: 'extend', 
@@ -232,30 +234,40 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
               </h3>
 
               <span 
-                className="hidden md:block text-sm transition-colors duration-500"
+                className="hidden md:block text-base transition-colors duration-500"
                 style={{ color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.5)' }}
               >
                 {item.role}
               </span>
 
-              <div 
-                className="w-12 h-12 rounded-full flex items-center justify-center text-base font-medium transition-colors duration-500"
-                style={{
-                  backgroundColor: isThemed ? `${theme.border}20` : 'rgba(255, 255, 255, 0.1)',
-                  borderWidth: '1px',
-                  borderStyle: 'solid',
-                  borderColor: isThemed ? theme.border : 'rgba(255, 255, 255, 0.2)',
-                  color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.6)',
-                }}
-              >
-                {item.company.charAt(0)}
-              </div>
+              {item.logo ? (
+                <div className="relative w-12 h-12 flex-shrink-0" style={{ overflow: 'visible' }}>
+                  <img 
+                    src={item.logo} 
+                    alt={item.company} 
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-auto pointer-events-none"
+                  />
+                </div>
+              ) : (
+                <div 
+                  className="w-12 h-12 rounded-full flex items-center justify-center text-base font-medium transition-colors duration-500"
+                  style={{
+                    backgroundColor: isThemed ? `${theme.border}20` : 'rgba(255, 255, 255, 0.1)',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: isThemed ? theme.border : 'rgba(255, 255, 255, 0.2)',
+                    color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.6)',
+                  }}
+                >
+                  {item.company.charAt(0)}
+                </div>
+              )}
             </div>
 
             {/* mobile role */}
             <div className="md:hidden mt-2">
               <span 
-                className="text-sm transition-colors duration-500"
+                className="text-base transition-colors duration-500"
                 style={{ color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.5)' }}
               >
                 {item.role}
@@ -299,13 +311,13 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
             )}
             <CurvedComponent className="p-6">
               <h4 
-                className="text-sm uppercase tracking-wider mb-2 transition-colors duration-500"
+                className="text-base uppercase tracking-wider mb-2 transition-colors duration-500"
                 style={{ color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.4)' }}
               >
                 Overview
               </h4>
               <p 
-                className="text-sm leading-relaxed transition-colors duration-500"
+                className="text-base leading-relaxed transition-colors duration-500"
                 style={{ color: isThemed ? theme.textPrimary : 'rgba(255, 255, 255, 0.7)' }}
               >
                 Built and maintained production systems, collaborated with cross-functional teams, 
@@ -315,13 +327,13 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
 
             <CurvedComponent className="p-6">
               <h4 
-                className="text-sm uppercase tracking-wider mb-2 transition-colors duration-500"
+                className="text-base uppercase tracking-wider mb-2 transition-colors duration-500"
                 style={{ color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.4)' }}
               >
                 What I worked on
               </h4>
               <p 
-                className="text-sm leading-relaxed transition-colors duration-500"
+                className="text-base leading-relaxed transition-colors duration-500"
                 style={{ color: isThemed ? theme.textPrimary : 'rgba(255, 255, 255, 0.7)' }}
               >
                 Developed microservices and APIs, implemented testing strategies, 
@@ -331,7 +343,7 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
 
             <CurvedComponent className="p-6">
               <h4 
-                className="text-sm uppercase tracking-wider mb-3 transition-colors duration-500"
+                className="text-base uppercase tracking-wider mb-3 transition-colors duration-500"
                 style={{ color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.4)' }}
               >
                 Focus
@@ -340,7 +352,7 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
                 {['Backend', 'APIs', 'Testing', 'Performance'].map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs px-3 py-1 rounded-full transition-colors duration-500"
+                    className="text-sm px-3 py-1 rounded-full transition-colors duration-500"
                     style={{
                       backgroundColor: isThemed ? `${theme.border}10` : 'rgba(255, 255, 255, 0.05)',
                       borderWidth: '1px',
