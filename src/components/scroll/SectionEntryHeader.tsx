@@ -40,7 +40,7 @@ export function SectionEntryHeader({ sectionId }: SectionEntryHeaderProps) {
 
       <div 
         className="
-          w-full min-h-[60vh] p-12 rounded-[16px]
+          w-full min-h-[70vh] p-12 rounded-[16px]
           flex flex-col justify-between
           border border-white/20 backdrop-blur-sm
           transition-colors duration-500 hover:border-white/30
