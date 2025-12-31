@@ -3,6 +3,7 @@
  * 
  * A 3D model viewer with mouse parallax, hover rotation, drag rotation, and auto-rotation.
  * Uses @react-three/fiber and @react-three/drei for rendering GLB/GLTF models.
+ * Only loads and renders when in viewport for performance.
  */
 'use client';
 
@@ -127,9 +128,37 @@ export function Simple3DViewer({
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragRotation, setDragRotation] = useState({ x: 0, y: 0 });
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
   const lastMousePos = useRef({ x: 0, y: 0 });
 
+  // only load when in viewport
   useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            setHasLoaded(true);
+          } else {
+            setIsVisible(false);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '100px' }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
+  // mouse tracking only when visible
+  useEffect(() => {
+    if (!isVisible) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
       
@@ -183,7 +212,7 @@ export function Simple3DViewer({
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isDragging]);
+  }, [isDragging, isVisible]);
 
   return (
     <div 
@@ -191,30 +220,39 @@ export function Simple3DViewer({
       className={`w-full h-full ${className}`}
       style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
     >
-      <Canvas
-        camera={{ position: [0, 0, 2.5], fov: 50 }}
-        style={{ background: 'transparent' }}
-        gl={{ 
-          antialias: true,
-          toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 1.2
-        }}
-      >
-        <Lights />
-        
-        <Suspense fallback={null}>
-          <Model 
-            url={modelUrl} 
-            autoRotate={autoRotate} 
-            rotateSpeed={rotateSpeed}
-            mousePos={mousePos}
-            dragRotation={dragRotation}
-            isDragging={isDragging}
-            scale={scale}
-          />
-          <Environment preset="studio" background={false} />
-        </Suspense>
-      </Canvas>
+      {hasLoaded && (
+        <Canvas
+          camera={{ position: [0, 0, 2.5], fov: 50 }}
+          style={{ background: 'transparent' }}
+          frameloop={isVisible ? 'always' : 'demand'}
+          gl={{ 
+            antialias: true,
+            toneMapping: THREE.ACESFilmicToneMapping,
+            toneMappingExposure: 1.2
+          }}
+        >
+          <Lights />
+          
+          <Suspense fallback={null}>
+            <Model 
+              url={modelUrl} 
+              autoRotate={autoRotate} 
+              rotateSpeed={rotateSpeed}
+              mousePos={mousePos}
+              dragRotation={dragRotation}
+              isDragging={isDragging}
+              scale={scale}
+            />
+            <Environment preset="studio" background={false} />
+          </Suspense>
+        </Canvas>
+      )}
+      
+      {!hasLoaded && (
+        <div className="w-full h-full flex items-center justify-center">
+          <div className="text-white/40 text-sm">Loading 3D model...</div>
+        </div>
+      )}
     </div>
   );
 }

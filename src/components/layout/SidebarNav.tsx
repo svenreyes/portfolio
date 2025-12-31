@@ -2,11 +2,9 @@
 
 import { useEffect, useRef } from 'react';
 import { useScrollToSection } from '@/hooks/useScrollSpy';
-import { useSectionProgress } from '@/hooks/useSectionProgress';
+import { useSectionContext } from '@/context/SectionContext';
 import { SECTIONS } from '@/config/sections.config';
 import { IndexCard } from '@/components/navigation/IndexCard';
-
-const SECTION_IDS = SECTIONS.map((s) => s.id);
 
 // component count and size multiplier for each section
 const SECTION_WEIGHTS: Record<string, number> = {
@@ -19,7 +17,7 @@ const SECTION_WEIGHTS: Record<string, number> = {
 };
 
 export function SidebarNav() {
-  const { id: activeSectionId, progress, heights } = useSectionProgress(SECTION_IDS);
+  const { id: activeSectionId, progress } = useSectionContext();
   const scrollToSection = useScrollToSection();
   const cardRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 

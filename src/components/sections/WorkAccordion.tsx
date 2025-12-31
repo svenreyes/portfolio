@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CurvedComponent } from '@/components/layout/CurvedComponent';
 import { useTheme } from '@/context/ThemeContext';
-import { useSectionProgress } from '@/hooks/useSectionProgress';
+import { useSectionContext } from '@/context/SectionContext';
 
 interface WorkItem {
   id: string;
@@ -98,12 +98,10 @@ function VideoPlayer({ src }: { src: string }) {
   );
 }
 
-const SECTION_IDS = ['hero', 'about', 'approach', 'experience', 'projects', 'contact'];
-
 export function WorkAccordion() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const { setThemeById } = useTheme();
-  const { id: activeSection } = useSectionProgress(SECTION_IDS);
+  const { id: activeSection } = useSectionContext();
 
   const handleToggle = (id: string) => {
     const newId = expandedId === id ? null : id;
