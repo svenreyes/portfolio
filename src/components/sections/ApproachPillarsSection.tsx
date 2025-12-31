@@ -58,7 +58,7 @@ export function ApproachPillarsSection() {
                 flex-1 flex items-center justify-between py-4 px-5
                 border border-white/20 rounded-t-2xl
                 transition-all duration-300
-                hover:bg-white/5
+                cursor-pointer
                 ${isActive ? 'border-b-transparent' : ''}
                 ${i > 0 ? '-ml-[1px]' : ''}
               `}
