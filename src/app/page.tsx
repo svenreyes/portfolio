@@ -32,7 +32,7 @@ stormy skies"
 
         <div id="about" className="flex flex-col gap-4">
           <SectionEntryHeader sectionId="about" />
-          <CurvedComponent className="min-h-screen">
+          <CurvedComponent>
             <AboutHero />
           </CurvedComponent>
           <CurvedComponent>

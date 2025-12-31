@@ -2,20 +2,20 @@
 
 export function AboutHero() {
   return (
-    <div className="relative w-full h-full min-h-screen flex flex-col justify-between p-8 md:p-12 lg:p-16">
+    <div className="relative w-full h-full min-h-[70vh] flex flex-col justify-between p-6 md:p-8 lg:p-10">
       {/* top headline */}
       <div className="flex flex-col">
-        <h2 className="text-[clamp(4rem,12vw,11rem)] font-light leading-[0.95] tracking-tight text-white text-center">
+        <h2 className="text-[clamp(3rem,10vw,8rem)] font-light leading-[0.95] tracking-tight text-white text-center">
           I am
         </h2>
         
         {/* first divider */}
-        <div className="w-full h-px bg-white/20 mt-8" />
+        <div className="w-full h-px bg-white/20 mt-4" />
       </div>
 
       {/* middle section */}
       <div className="flex flex-col">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 py-8">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 py-4">
           {/* small text left */}
           <p className="text-white/70 text-sm md:text-base font-light leading-relaxed max-w-[280px]">
             I design and build software<br />
@@ -23,7 +23,7 @@ export function AboutHero() {
           </p>
           
           {/* large text right */}
-          <span className="text-[clamp(4rem,14vw,12rem)] font-light leading-[0.85] tracking-tight text-white">
+          <span className="text-[clamp(3rem,12vw,9rem)] font-light leading-[0.85] tracking-tight text-white">
             Sven
           </span>
         </div>
@@ -34,12 +34,12 @@ export function AboutHero() {
 
       {/* bottom headline */}
       <div className="flex flex-col">
-        <h2 className="text-[clamp(4rem,16vw,14rem)] font-light italic leading-[0.85] tracking-tight text-white">
+        <h2 className="text-[clamp(3rem,14vw,10rem)] font-light italic leading-[0.85] tracking-tight text-white">
           Reyes
         </h2>
 
         {/* footer */}
-        <div className="flex justify-between items-end mt-8">
+        <div className="flex justify-between items-end mt-4">
           <span className="text-white/50 text-sm">(About)</span>
           <span className="text-white/50 text-sm flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-white" />
