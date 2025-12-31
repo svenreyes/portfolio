@@ -209,10 +209,10 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
             transformOrigin: 'bottom center',
             transformStyle: 'preserve-3d',
             zIndex: 10,
-            backgroundColor: isThemed ? theme.accent3 : '#000000',
+            backgroundColor: '#000000',
             borderWidth: '1px',
             borderStyle: 'solid',
-            borderColor: isThemed ? theme.border : 'rgba(255, 255, 255, 0.2)',
+            borderColor: 'rgba(255, 255, 255, 0.2)',
           }}
         >
           <button
@@ -230,14 +230,14 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
             <div className="w-full flex items-center justify-between">
               <h3 
                 className="text-2xl md:text-3xl font-medium transition-colors duration-500"
-                style={{ color: isThemed ? theme.textPrimary : '#ffffff' }}
+                style={{ color: '#ffffff' }}
               >
                 {item.company}
               </h3>
 
               <span 
                 className="hidden md:block text-base transition-colors duration-500"
-                style={{ color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.5)' }}
+                style={{ color: 'rgba(255, 255, 255, 0.5)' }}
               >
                 {item.role}
               </span>
@@ -254,11 +254,11 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
                 <div 
                   className="w-12 h-12 rounded-full flex items-center justify-center text-base font-medium transition-colors duration-500"
                   style={{
-                    backgroundColor: isThemed ? `${theme.border}20` : 'rgba(255, 255, 255, 0.1)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
                     borderWidth: '1px',
                     borderStyle: 'solid',
-                    borderColor: isThemed ? theme.border : 'rgba(255, 255, 255, 0.2)',
-                    color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.6)',
+                    borderColor: 'rgba(255, 255, 255, 0.2)',
+                    color: 'rgba(255, 255, 255, 0.6)',
                   }}
                 >
                   {item.company.charAt(0)}
@@ -270,7 +270,7 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
             <div className="md:hidden mt-2">
               <span 
                 className="text-base transition-colors duration-500"
-                style={{ color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.5)' }}
+                style={{ color: 'rgba(255, 255, 255, 0.5)' }}
               >
                 {item.role}
               </span>
@@ -316,7 +316,9 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
                 <VideoPlayer src={item.video} logo={item.id === 'sas' ? item.logo : undefined} />
               </div>
             )}
-            <CurvedComponent className="p-6">
+            <CurvedComponent className="p-6" style={{
+              backgroundColor: isThemed && theme.componentBg ? theme.componentBg : undefined,
+            }}>
               <h4 
                 className="text-base uppercase tracking-wider mb-2 transition-colors duration-500 font-bold"
                 style={{ 
@@ -335,7 +337,9 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
               </p>
             </CurvedComponent>
 
-            <CurvedComponent className="p-6">
+            <CurvedComponent className="p-6" style={{
+              backgroundColor: isThemed && theme.componentBgAlt ? theme.componentBgAlt : undefined,
+            }}>
               <h4 
                 className="text-base uppercase tracking-wider mb-2 transition-colors duration-500 font-bold"
                 style={{ 
@@ -354,7 +358,9 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
               </p>
             </CurvedComponent>
 
-            <CurvedComponent className="p-6">
+            <CurvedComponent className="p-6" style={{
+              backgroundColor: isThemed && theme.componentBg ? theme.componentBg : undefined,
+            }}>
               <h4 
                 className="text-base uppercase tracking-wider mb-3 transition-colors duration-500 font-bold"
                 style={{ 

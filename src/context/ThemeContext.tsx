@@ -12,6 +12,7 @@ export interface CompanyTheme {
   accent2: string;
   accent3: string;
   componentBg?: string;
+  componentBgAlt?: string;
   hoverColor?: string;
   hoverTextColor?: string;
   noBorder?: boolean;
@@ -34,13 +35,16 @@ export const companyThemes: Record<string, CompanyTheme> = {
   default: defaultTheme,
   sas: {
     id: 'sas',
-    background: '#0766D1',
-    border: '#FF66B2',
+    background: '#ffffff',
+    border: 'transparent',
     textPrimary: '#ffffff',
-    textLight: '#C4DEFD',
-    accent1: '#4398F9',
-    accent2: '#C4DEFD',
-    accent3: '#4398F9',
+    textLight: '#ffffff',
+    accent1: '#0766D1',
+    accent2: '#FF66B2',
+    accent3: '#FF66B2',
+    componentBg: '#0766D1',
+    componentBgAlt: '#FF66B2',
+    noBorder: true,
     headlineFont: 'var(--font-anova-bold)',
   },
   extend: {

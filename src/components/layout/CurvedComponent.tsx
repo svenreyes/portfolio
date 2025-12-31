@@ -7,9 +7,10 @@ interface CurvedComponentProps {
   children: React.ReactNode;
   className?: string;
   id?: string;
+  style?: React.CSSProperties;
 }
 
-export function CurvedComponent({ children, className = '', id }: CurvedComponentProps) {
+export function CurvedComponent({ children, className = '', id, style }: CurvedComponentProps) {
   const { theme, isThemed } = useTheme();
   const [isHovered, setIsHovered] = useState(false);
   
@@ -17,9 +18,13 @@ export function CurvedComponent({ children, className = '', id }: CurvedComponen
   const hasHoverEffect = isThemed && theme.hoverColor;
   const hasGlow = isThemed && theme.glow;
   
-  const bgColor = isThemed && theme.componentBg 
-    ? (isHovered && hasHoverEffect ? theme.hoverColor : theme.componentBg)
-    : 'transparent';
+  // extract backgroundColor from style so we can control it separately
+  const { backgroundColor: styleBgColor, ...restStyle } = style || {};
+  
+  // hover effect takes priority over any background color
+  const bgColor = isHovered && hasHoverEffect 
+    ? theme.hoverColor 
+    : (styleBgColor || (isThemed && theme.componentBg ? theme.componentBg : 'transparent'));
   
   const borderColor = hasNoBorder 
     ? 'transparent'
@@ -40,6 +45,7 @@ export function CurvedComponent({ children, className = '', id }: CurvedComponen
         rounded-[16px]
         transition-all duration-500
         ${hasHoverEffect && isHovered ? 'shadow-[0_0_30px_rgba(0,197,251,0.3)]' : ''}
+        ${hasGlow && isHovered ? 'shadow-[0_0_20px_rgba(0,197,251,0.15)]' : ''}
         ${className}
       `}
       style={{
@@ -48,6 +54,7 @@ export function CurvedComponent({ children, className = '', id }: CurvedComponen
         borderColor,
         backgroundColor: bgColor,
         color: textColor,
+        ...restStyle,
       }}
     >
       {children}
