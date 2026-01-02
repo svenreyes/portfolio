@@ -10,6 +10,8 @@
 import { useEffect, useRef } from 'react';
 import { SidebarNav } from './SidebarNav';
 import { useTheme } from '@/context/ThemeContext';
+import { CloudyBackground } from '@/components/backgrounds/CloudyBackground';
+import { NoiseCanvas } from '@/components/backgrounds/NoiseCanvas';
 
 interface LandingShellProps {
   children?: React.ReactNode;
@@ -92,10 +94,17 @@ export function LandingShell({ children }: LandingShellProps) {
 
   return (
     <>
+      {/* cloudy background for skulpt theme */}
+      {theme.hasCloudy && <CloudyBackground zIndex={0} />}
+      
+      {/* default solid background */}
       <div 
         className="fixed inset-0 z-0 transition-colors duration-500" 
-        style={{ backgroundColor: theme.background }}
+        style={{ backgroundColor: theme.hasCloudy ? 'transparent' : theme.background }}
       />
+      
+      {/* noise grain overlay for skulpt theme */}
+      {theme.hasCloudy && <NoiseCanvas />}
 
       <div className="relative z-10 h-screen overflow-x-visible overflow-y-hidden">
         <div className="hidden lg:flex h-full p-4 gap-0 overflow-visible">

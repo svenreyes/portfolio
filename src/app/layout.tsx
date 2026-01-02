@@ -32,6 +32,12 @@ const nunitoSans = localFont({
   weight: "100 900",
 });
 
+const nersans = localFont({
+  src: "../../public/fonts/skulpt/Nersans Font.ttf",
+  variable: "--font-nersans",
+  weight: "400",
+});
+
 export const metadata: Metadata = {
   title: "Sven Reyes - Portfolio",
   description: "Portfolio of Sven Reyes",
@@ -45,7 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nordiqueRegular.variable} ${nordiqueSemibold.variable} ${nordiqueLight.variable} ${anovaBold.variable} ${nunitoSans.variable} antialiased`}
+        className={`${nordiqueRegular.variable} ${nordiqueSemibold.variable} ${nordiqueLight.variable} ${anovaBold.variable} ${nunitoSans.variable} ${nersans.variable} antialiased`}
         style={{ fontFamily: "var(--font-nordique)" }}
       >
         {children}

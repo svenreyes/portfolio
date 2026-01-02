@@ -41,6 +41,7 @@ const workItems: WorkItem[] = [
     role: 'Co-Founder · Creative Technology',
     description: 'Co-founded and engineered interactive web experiences, owning technical architecture while collaborating across design, branding, and product direction.',
     color: '#CBD1D6',
+    logo: '/skulptlogo.svg',
   },
   { 
     id: 'blockchain', 

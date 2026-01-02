@@ -18,6 +18,7 @@ export interface CompanyTheme {
   noBorder?: boolean;
   glow?: boolean;
   headlineFont?: string;
+  hasCloudy?: boolean;
 }
 
 const defaultTheme: CompanyTheme = {
@@ -65,13 +66,17 @@ export const companyThemes: Record<string, CompanyTheme> = {
   },
   skulpt: {
     id: 'skulpt',
-    background: '#0a0a0a',
-    border: '#CBD1D6',
-    textPrimary: '#CBD1D6',
-    textLight: 'rgba(203, 209, 214, 0.6)',
+    background: 'transparent',
+    border: 'transparent',
+    textPrimary: '#B0BDC5',
+    textLight: '#B0BDC5',
     accent1: '#CBD1D6',
-    accent2: '#1a1a1a',
-    accent3: '#ffffff',
+    accent2: '#CBD1D6',
+    accent3: '#CBD1D6',
+    componentBg: '#CBD1D6',
+    noBorder: true,
+    hasCloudy: true,
+    headlineFont: 'var(--font-nersans)',
   },
   blockchain: {
     id: 'blockchain',
