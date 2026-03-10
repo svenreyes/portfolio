@@ -71,6 +71,7 @@ stormy skies"
           <WorkAccordion />
         </div>
 
+        {/* Projects section — hidden until ready
         <div id="projects" className="flex flex-col gap-4">
           <SectionEntryHeader sectionId="projects" />
           <CurvedComponent className="min-h-[120vh] py-12">
@@ -105,6 +106,7 @@ stormy skies"
             </div>
           </CurvedComponent>
         </div>
+        */}
 
         <div id="contact" className="flex flex-col gap-4">
           <SectionEntryHeader sectionId="contact" />
@@ -120,15 +122,14 @@ stormy skies"
 
               <div className="flex flex-col gap-6 items-center">
                 <a
-                  href="mailto:hello@svenreyes.com"
+                  href="mailto:sven.s.reyes@gmail.com"
                   className="text-[clamp(1.25rem,2vw,1.5rem)] text-white/90 hover:text-white transition-colors"
                 >
-                  hello@svenreyes.com
+                  sven.s.reyes@gmail.com
                 </a>
                 <div className="flex gap-6 justify-center">
-                  <a href="#" className="text-white/60 hover:text-white transition-colors">LinkedIn</a>
-                  <a href="#" className="text-white/60 hover:text-white transition-colors">GitHub</a>
-                  <a href="#" className="text-white/60 hover:text-white transition-colors">Twitter</a>
+                  <a href="https://www.linkedin.com/in/svenreyes/" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">LinkedIn</a>
+                  <a href="https://github.com/svenreyes" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">GitHub</a>
                 </div>
               </div>
             </div>

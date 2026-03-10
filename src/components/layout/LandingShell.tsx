@@ -2,13 +2,14 @@
  * LandingShell Component
  * 
  * Main layout wrapper providing the split-scroll interface with sidebar
- * navigation on the left and main content on the right. Handles independent
- * scroll isolation between panels and responsive layout for mobile/desktop.
+ * navigation on the left (desktop) and bottom navigation (mobile).
+ * Children are rendered once to avoid duplicate DOM IDs.
  */
 'use client';
 
 import { useEffect, useRef } from 'react';
 import { SidebarNav } from './SidebarNav';
+import { MobileBottomNav } from '@/components/navigation/MobileBottomNav';
 import { useTheme } from '@/context/ThemeContext';
 import { CloudyBackground } from '@/components/backgrounds/CloudyBackground';
 import { NoiseCanvas } from '@/components/backgrounds/NoiseCanvas';
@@ -23,6 +24,9 @@ export function LandingShell({ children }: LandingShellProps) {
   const { theme } = useTheme();
 
   useEffect(() => {
+    const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+    if (!isDesktop) return;
+
     const sidebar = sidebarRef.current;
     const mainContent = mainContentRef.current;
 
@@ -94,56 +98,48 @@ export function LandingShell({ children }: LandingShellProps) {
 
   return (
     <>
-      {/* cloudy background for skulpt theme */}
       {theme.hasCloudy && <CloudyBackground zIndex={0} />}
       
-      {/* default solid background */}
       <div 
         className="fixed inset-0 z-0 transition-colors duration-500" 
         style={{ backgroundColor: theme.hasCloudy ? 'transparent' : theme.background }}
       />
       
-      {/* noise grain overlay for skulpt theme */}
       {theme.hasCloudy && <NoiseCanvas />}
 
       <div className="relative z-10 h-screen overflow-x-visible overflow-y-hidden">
-        <div className="hidden lg:flex h-full p-4 gap-0 overflow-visible">
+        <div className="h-full flex flex-col lg:flex-row lg:p-4 lg:gap-0 lg:overflow-visible">
+          {/* Desktop sidebar */}
           <aside
             ref={sidebarRef}
-            className="w-[200px] flex-shrink-0 h-full overflow-y-auto overflow-x-hidden scrollbar-none relative z-10 pr-4"
+            className="hidden lg:block w-[200px] flex-shrink-0 h-full overflow-y-auto overflow-x-hidden scrollbar-none relative z-10 pr-4"
           >
             <SidebarNav />
           </aside>
 
+          {/* Main content — single instance shared by mobile and desktop */}
           <main
             ref={mainContentRef}
             data-scroll-container
-            className="flex-1 h-full pr-4
-                     scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent
-                     hover:scrollbar-thumb-white/30"
+            className="flex-1 h-full
+                       overflow-y-auto lg:overflow-y-scroll
+                       overflow-x-hidden lg:overflow-x-visible
+                       px-4 pt-4 pb-[100px]
+                       lg:px-0 lg:pt-0 lg:pb-0 lg:pr-4 lg:pl-[48px] lg:ml-[-48px]
+                       scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent
+                       hover:scrollbar-thumb-white/30"
             style={{
               scrollbarWidth: 'thin',
               scrollbarColor: 'rgba(255, 255, 255, 0.2) transparent',
-              overflowY: 'scroll',
-              overflowX: 'visible',
-              marginLeft: '-48px',
-              paddingLeft: '48px',
             }}
           >
             {children}
           </main>
         </div>
-
-        <div className="lg:hidden h-full overflow-y-auto p-4 flex flex-col gap-4">
-          <div className="w-full">
-            <SidebarNav />
-          </div>
-
-          <div className="flex-1 min-h-[600px]">
-            {children}
-          </div>
-        </div>
       </div>
+
+      {/* Mobile bottom navigation */}
+      <MobileBottomNav />
     </>
   );
 }

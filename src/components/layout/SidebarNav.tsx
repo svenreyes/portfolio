@@ -11,8 +11,7 @@ const SECTION_WEIGHTS: Record<string, number> = {
   hero: 1,
   about: 3,
   approach: 7,
-  experience: 5,  // 5 work accordion items
-  projects: 1.5,
+  experience: 5,
   contact: 1,
 };
 

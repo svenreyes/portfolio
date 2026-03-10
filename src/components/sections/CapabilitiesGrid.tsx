@@ -67,18 +67,21 @@ export function CapabilitiesGrid() {
   return (
     <div 
       ref={ref}
-      className="w-full grid grid-cols-1 md:grid-cols-3 gap-6"
+      className="w-full flex overflow-x-auto snap-x snap-mandatory gap-4 scrollbar-none
+                 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:snap-none"
+      style={{ WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
     >
       {columns.map((column, i) => (
         <div
           key={column.id}
-          className="border border-white/20 rounded-[16px] p-6 py-16 transition-all duration-500 ease-out hover:border-white/30 group"
+          className="min-w-[85vw] snap-center flex-shrink-0
+                     md:min-w-0 md:flex-shrink
+                     border border-white/20 rounded-[16px] p-6 py-16 transition-all duration-500 ease-out hover:border-white/30 group"
           style={{
             opacity: visibleColumns > i ? 1 : 0,
             transform: visibleColumns > i ? 'translateY(0)' : 'translateY(16px)',
           }}
         >
-          {/* header */}
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-base text-xl font-semibold text-white tracking-wide group-hover:font-bold transition-all duration-300">
               {column.title}
@@ -88,7 +91,6 @@ export function CapabilitiesGrid() {
             </span>
           </div>
 
-          {/* list */}
           <ul className="space-y-0">
             {column.items.map((item, j) => (
               <li 

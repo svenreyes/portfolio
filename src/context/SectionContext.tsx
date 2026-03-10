@@ -8,7 +8,7 @@ interface SectionProgress {
   heights: Map<string, number>;
 }
 
-const SECTION_IDS = ['hero', 'about', 'approach', 'experience', 'projects', 'contact'];
+const SECTION_IDS = ['hero', 'about', 'approach', 'experience', 'contact'];
 
 const SectionContext = createContext<SectionProgress>({
   id: 'hero',

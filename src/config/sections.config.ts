@@ -28,14 +28,15 @@ export const SECTIONS: Section[] = [
     index: '03',
     label: 'Experience',
   },
-  {
-    id: 'projects',
-    index: '04',
-    label: 'Projects',
-  },
+  // Projects section — uncomment when ready
+  // {
+  //   id: 'projects',
+  //   index: '04',
+  //   label: 'Projects',
+  // },
   {
     id: 'contact',
-    index: '05',
+    index: '04',
     label: 'Contact',
   },
 ];
