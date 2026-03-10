@@ -27,10 +27,6 @@ export default function Home() {
         <CurvedComponent id="hero" className="min-h-[90vh]">
           <Hero3D 
             name="Sven Reyes"
-            tagline="we are looking to bring
-you enlightenment
-To offer illumination in
-stormy skies"
           />
         </CurvedComponent>
 

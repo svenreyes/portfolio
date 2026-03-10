@@ -28,7 +28,7 @@ interface Hero3DProps {
 
 export function Hero3D({ 
   name = 'Sven Reyes', 
-  tagline = 'we are looking to bring\nyou enlightenment\nTo offer illumination in\nstormy skies',
+  tagline = '',
   modelUrl = '/3D/angel1.glb'
 }: Hero3DProps) {
   return (
@@ -39,13 +39,15 @@ export function Hero3D({
         </h1>
       </div>
 
-      <div className="absolute top-8 right-8 z-10 text-right">
-        {tagline.split('\n').map((line, i) => (
-          <p key={i} className="text-sm md:text-base font-light text-white/80 italic leading-relaxed">
-            {line}
-          </p>
-        ))}
-      </div>
+      {tagline.trim().length > 0 && (
+        <div className="absolute top-8 right-8 z-10 text-right">
+          {tagline.split('\n').map((line, i) => (
+            <p key={i} className="text-sm md:text-base font-light text-white/80 italic leading-relaxed">
+              {line}
+            </p>
+          ))}
+        </div>
+      )}
 
       <div className="w-full h-[75vh]">
         <Simple3DViewer 
