@@ -106,7 +106,7 @@ export default function Home() {
 
         <div id="contact" className="flex flex-col gap-4">
           <SectionEntryHeader sectionId="contact" />
-          <CurvedComponent className="min-h-[80vh] py-12">
+          <CurvedComponent className="min-h-[80vh] py-12 flex items-center justify-center">
             <div className="max-w-6xl mx-auto px-8 text-center">
               <SplitHeadline as="h2" className="mb-16">
                 {`Let's work\ntogether`}
@@ -126,6 +126,7 @@ export default function Home() {
                 <div className="flex gap-6 justify-center">
                   <a href="https://www.linkedin.com/in/svenreyes/" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">LinkedIn</a>
                   <a href="https://github.com/svenreyes" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">GitHub</a>
+                  <a href="/Sven_Reyes_Resume.pdf" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">Resume</a>
                 </div>
               </div>
             </div>
