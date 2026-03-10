@@ -15,35 +15,47 @@ interface WorkItem {
   video?: string;
   logo?: string;
   wordmark?: string;
+  overview: string;
+  workedOn: string;
+  focusTags: string[];
 }
 
 const workItems: WorkItem[] = [
   { 
     id: 'sas', 
     company: 'SAS', 
-    role: 'Software Engineering Intern',
-    description: 'Built and tested production-level software systems with a focus on reliability, correctness, and maintainability in large-scale codebases.',
+    role: 'Backend & Data Reliability Intern',
+    description: 'Engineered distributed data and CI/CD services supporting 10+ internal systems, focusing on reliability, data correctness, and pipeline efficiency.',
     color: '#1E6AE1',
     video: '/video/SAS.mp4',
     logo: '/Asset 1.svg',
+    overview: 'Engineered distributed data and CI/CD services supporting 10+ internal systems, focusing on reliability, data correctness, and pipeline efficiency across the organization.',
+    workedOn: 'Built automation pipelines in Python, Docker, and GitHub Actions, reducing manual operational toil by 30%. Analyzed build and runtime logs to identify regressions, latency bottlenecks, and failure patterns, improving end-to-end system performance by 25%. Enhanced data validation workflows and internal tooling used by downstream analytics and ML teams.',
+    focusTags: ['Distributed Systems', 'CI/CD', 'Python', 'Data Reliability', 'Docker'],
   },
   { 
     id: 'extend', 
     company: 'Extend', 
-    role: 'Solution Engineer Intern',
-    description: 'Developed and debugged real-world API integrations at a fast-moving startup, working closely with product and customer teams to ship solutions quickly.',
+    role: 'Backend Engineering Intern',
+    description: 'Developed and maintained Node.js and SQL-backed APIs processing 1M+ daily events, building internal tooling and automating integration workflows.',
     color: '#00C5FB',
     video: '/video/extend.mp4',
     logo: '/extendlogo.svg',
+    overview: 'Developed and maintained high-volume APIs processing 1M+ daily events, reinforcing experience with event-driven data pipelines and backend reliability at scale.',
+    workedOn: 'Improved backend data workflows and optimized SQL queries, reducing latency and error rates by 18%. Built internal dashboards surfacing operational metrics and data anomalies to improve visibility and response time. Automated integration workflows used by multiple downstream product teams, reducing manual effort by 35%.',
+    focusTags: ['Node.js', 'SQL', 'APIs', 'Dashboards', 'Automation'],
   },
   { 
     id: 'skulpt', 
     company: 'SKULPT', 
-    role: 'Co-Founder · Creative Technology',
-    description: 'Co-founded and engineered interactive web experiences, owning technical architecture while collaborating across design, branding, and product direction.',
+    role: 'Founding Full-Stack Engineer (CTO)',
+    description: 'Architected scalable APIs and data models in TypeScript, PostgreSQL, and Supabase, supporting analytics and event-tracking for production web apps.',
     color: '#CBD1D6',
     logo: '/skulptlogo.svg',
     wordmark: '/wordmark.svg',
+    overview: 'Architected scalable APIs and data models in TypeScript, PostgreSQL, and Supabase, supporting analytics and event-tracking needs for production web applications.',
+    workedOn: 'Implemented pipeline-like abstractions for ingesting and transforming app-level telemetry, improving data accessibility for internal dashboards. Reduced page-load latency by 40% through profiling, caching, and architectural refinement. Collaborated across design, product, and engineering with a craft-focused development culture.',
+    focusTags: ['TypeScript', 'PostgreSQL', 'Supabase', 'Full-Stack', 'Performance'],
   },
   { 
     id: 'blockchain', 
@@ -51,6 +63,9 @@ const workItems: WorkItem[] = [
     role: 'Undergraduate Research',
     description: 'Researched smart contract reliability through metamorphic testing, evaluating how behavioral properties change across transformations in blockchain systems.',
     color: '#D4AF37',
+    overview: 'Investigated smart contract correctness and reliability through metamorphic testing methodologies applied to blockchain systems.',
+    workedOn: 'Designed and executed metamorphic test cases to evaluate behavioral properties of smart contracts across code transformations. Analyzed failure patterns and edge cases in contract execution to surface reliability concerns in decentralized systems.',
+    focusTags: ['Smart Contracts', 'Metamorphic Testing', 'Blockchain', 'Research'],
   },
   { 
     id: 'cv', 
@@ -58,6 +73,9 @@ const workItems: WorkItem[] = [
     role: 'Undergraduate Research',
     description: 'Conducted depth-based computer vision research using an Arducam with infrared illumination, designing experiments to analyze spatial perception and depth inference.',
     color: '#7B5CFF',
+    overview: 'Conducted depth-based computer vision research using stereo camera systems with infrared illumination for spatial perception analysis.',
+    workedOn: 'Designed and ran experiments using an Arducam with infrared illumination to analyze spatial perception and depth inference. Processed and evaluated depth maps to benchmark accuracy across varying environmental conditions and distances.',
+    focusTags: ['Computer Vision', 'Depth Sensing', 'Infrared', 'Research'],
   },
 ];
 
@@ -149,10 +167,19 @@ interface WorkPillProps {
   onToggle: () => void;
 }
 
+const embossedHeading: React.CSSProperties = {
+  textShadow: '0 0.5px 0 rgba(255,255,255,0.3)',
+};
+
+const embossedBody: React.CSSProperties = {
+  textShadow: '0 0.5px 0 rgba(255,255,255,0.25)',
+};
+
 function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
   const [isHovered, setIsHovered] = useState(false);
   const showPeek = isHovered && !isExpanded;
   const { theme, isThemed } = useTheme();
+  const isSkulpt = isExpanded && item.id === 'skulpt';
 
   return (
     <div
@@ -336,16 +363,21 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
                 style={{ 
                   color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.4)',
                   fontFamily: isThemed && theme.headlineFont ? theme.headlineFont : undefined,
+                  ...(isSkulpt ? embossedHeading : {}),
                 }}
               >
                 Overview
               </h4>
               <p 
                 className="text-base leading-relaxed transition-colors duration-500"
-                style={{ color: isThemed ? theme.textPrimary : 'rgba(255, 255, 255, 0.7)' }}
+                style={{
+                  color: isSkulpt
+                    ? '#ffffff'
+                    : (isThemed ? theme.textPrimary : 'rgba(255, 255, 255, 0.7)'),
+                  ...(isSkulpt ? embossedBody : {}),
+                }}
               >
-                Built and maintained production systems, collaborated with cross-functional teams, 
-                and delivered high-quality code that improved platform reliability.
+                {item.overview}
               </p>
             </CurvedComponent>
 
@@ -357,16 +389,21 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
                 style={{ 
                   color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.4)',
                   fontFamily: isThemed && theme.headlineFont ? theme.headlineFont : undefined,
+                  ...(isSkulpt ? embossedHeading : {}),
                 }}
               >
                 What I worked on
               </h4>
               <p 
                 className="text-base leading-relaxed transition-colors duration-500"
-                style={{ color: isThemed ? theme.textPrimary : 'rgba(255, 255, 255, 0.7)' }}
+                style={{
+                  color: isSkulpt
+                    ? '#ffffff'
+                    : (isThemed ? theme.textPrimary : 'rgba(255, 255, 255, 0.7)'),
+                  ...(isSkulpt ? embossedBody : {}),
+                }}
               >
-                Developed microservices and APIs, implemented testing strategies, 
-                optimized database queries, and shipped features used by thousands of users.
+                {item.workedOn}
               </p>
             </CurvedComponent>
 
@@ -378,12 +415,13 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
                 style={{ 
                   color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.4)',
                   fontFamily: isThemed && theme.headlineFont ? theme.headlineFont : undefined,
+                  ...(isSkulpt ? embossedHeading : {}),
                 }}
               >
                 Focus
               </h4>
               <div className="flex flex-wrap gap-2">
-                {['Backend', 'APIs', 'Testing', 'Performance'].map((tag) => (
+                {item.focusTags.map((tag) => (
                   <span
                     key={tag}
                     className="text-sm px-3 py-1 rounded-full transition-colors duration-500"
@@ -392,7 +430,10 @@ function WorkPill({ item, isExpanded, isDimmed, onToggle }: WorkPillProps) {
                       borderWidth: '1px',
                       borderStyle: 'solid',
                       borderColor: isThemed ? `${theme.border}40` : 'rgba(255, 255, 255, 0.1)',
-                      color: isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.6)',
+                      color: isSkulpt
+                        ? '#ffffff'
+                        : (isThemed ? theme.textLight : 'rgba(255, 255, 255, 0.6)'),
+                      ...(isSkulpt ? embossedBody : {}),
                     }}
                   >
                     {tag}

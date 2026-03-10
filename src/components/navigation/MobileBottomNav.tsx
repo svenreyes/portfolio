@@ -97,7 +97,7 @@ export function MobileBottomNav() {
                 ${!isThemed && !isActive ? 'backdrop-blur-sm' : ''}
               `}
               style={{
-                width: `${cardWidth}px`,
+                width: `${cardWidth + 10}px`,
                 height: '70px',
                 backgroundColor: bgColor,
                 borderWidth: hasNoBorder ? '0px' : '1px',
